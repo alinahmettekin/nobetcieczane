@@ -168,6 +168,7 @@ class _HomeViewState extends State<HomeView> {
                 text: 'Nöbetçi Eczane Ara',
                 onPressed: () async {
                   if (readingProvider.selectedCity?.slug != null && readingProvider.selectedDistrict?.slug != null) {
+                    readingProvider.setFillFieldValue(false);
                     await readingProvider.getPharmacies(
                         readingProvider.selectedCity!.slug!, readingProvider.selectedDistrict!.slug!);
                     _navigatePharmaciesView();

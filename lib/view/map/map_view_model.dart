@@ -24,7 +24,7 @@ class MapViewModel extends ChangeNotifier {
 
   Future<void> getAllPharmacy(LatLng location) async {
     if (allPharmacies.isEmpty) {
-      // allPharmacies = await Network.instance.getAllPharmacyByLocation(location);
+      allPharmacies = await Network.instance.getAllPharmacyByLocation(location);
     }
     notifyListeners();
   }

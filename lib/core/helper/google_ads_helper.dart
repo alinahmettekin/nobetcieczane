@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:nobetcieczane/core/credentials/credentials.dart';
 
 class GoogleAds extends ChangeNotifier {
   static GoogleAds? _instance;
@@ -11,9 +12,8 @@ class GoogleAds extends ChangeNotifier {
 
   BannerAd? bannerAd;
 
-  final _adUnitId = 'ca-app-pub-3940256099942544/6300978111';
+  final _adUnitId = Credentials.instance.adUnitId;
 
-  /// Loads a banner ad.
   loadBannerAd() {
     bannerAd = BannerAd(
       adUnitId: _adUnitId,

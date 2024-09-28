@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nobetcieczane/core/components/custom_maps_button.dart';
 import 'package:nobetcieczane/core/components/custom_pharmacy_tile.dart';
 import 'package:nobetcieczane/core/model/pharmacy_model.dart';
 
