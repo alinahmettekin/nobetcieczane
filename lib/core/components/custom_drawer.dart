@@ -1,5 +1,6 @@
-import 'package:eczanemnerede/view/settings.dart/settings_view.dart';
 import 'package:flutter/material.dart';
+import 'package:nobetcieczane/view/map/map_view.dart.dart';
+import 'package:nobetcieczane/view/settings.dart/settings_view.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -7,27 +8,55 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Drawer(
-      child: ListView(
-        children: [
-          const Icon(
-            Icons.local_pharmacy_outlined,
-            color: Colors.red,
-            size: 72,
-          ),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('AYARLAR'),
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const SettingsView(),
-            )),
-          ),
-          const ListTile(
-            leading: Icon(Icons.medical_services_rounded),
-            title: Text('TÜM ECZANELER'),
-          )
-        ],
+      child: Drawer(
+        backgroundColor: Colors.red,
+        child: ListView(
+          children: [
+            const SizedBox(height: 10),
+            const SizedBox(
+              height: 25,
+            ),
+            ListTile(
+              onTap: () => Navigator.of(context).pop(),
+              leading: Icon(
+                Icons.arrow_back,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              title: Text(
+                'Geri',
+                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.near_me, color: Theme.of(context).colorScheme.secondary),
+              title: Text(
+                'NÖBETÇİ ECZANELER',
+                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+              ),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const MapView(),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings, color: Theme.of(context).colorScheme.secondary),
+              title: Text(
+                'AYARLAR',
+                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsView(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

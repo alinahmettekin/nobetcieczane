@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:eczanemnerede/core/credentials/credentials.dart';
-import 'package:eczanemnerede/core/model/base_model.dart';
+import 'package:nobetcieczane/core/credentials/credentials.dart';
+import 'package:nobetcieczane/core/model/base_model.dart';
 
 class DioHelper {
   static DioHelper? _instance;

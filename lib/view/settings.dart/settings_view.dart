@@ -1,5 +1,5 @@
-import 'package:eczanemnerede/core/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:nobetcieczane/core/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class SettingsView extends StatefulWidget {
@@ -40,7 +40,9 @@ class _SettingsViewState extends State<SettingsView> {
                     ),
                     Switch(
                       value: Provider.of<ThemeProvider>(context).isDarkMode,
-                      onChanged: (value) => Provider.of<ThemeProvider>(context, listen: false).toggleTheme(),
+                      onChanged: (value) async {
+                        Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                      },
                     ),
                   ],
                 ),

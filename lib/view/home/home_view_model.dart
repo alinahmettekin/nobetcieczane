@@ -1,7 +1,7 @@
-import 'package:eczanemnerede/core/model/cities_model.dart';
-import 'package:eczanemnerede/core/model/pharmacy_model.dart';
-import 'package:eczanemnerede/core/network/network.dart';
 import 'package:flutter/material.dart';
+import 'package:nobetcieczane/core/model/cities_model.dart';
+import 'package:nobetcieczane/core/model/pharmacy_model.dart';
+import 'package:nobetcieczane/core/network/network.dart';
 
 class HomeViewModel extends ChangeNotifier {
   List<Cities> _cities = [];
@@ -13,6 +13,14 @@ class HomeViewModel extends ChangeNotifier {
   List<Pharmacy> get pharmacies => _pharmacies;
   Cities? selectedCity;
   Cities? selectedDistrict;
+
+  bool _fillFieldValue = false;
+  bool get fillFieldValue => _fillFieldValue;
+
+  void setFillFieldValue(bool value) {
+    _fillFieldValue = value;
+    notifyListeners();
+  }
 
   void setSelectedCity(Cities cities) {
     selectedCity = cities;

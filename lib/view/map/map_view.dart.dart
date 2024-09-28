@@ -1,7 +1,10 @@
-import 'package:eczanemnerede/view/map/map_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:nobetcieczane/core/components/custom_maps_button.dart';
+import 'package:nobetcieczane/core/components/custom_pharmacy_tile.dart';
+import 'package:nobetcieczane/core/model/pharmacy_model.dart';
+import 'package:nobetcieczane/view/map/map_view_model.dart';
 import 'package:provider/provider.dart';
 
 class MapView extends StatefulWidget {
@@ -15,47 +18,107 @@ class _MapViewState extends State<MapView> {
   LatLng? currenPosition;
   late final readingProvider = Provider.of<MapViewModel>(context, listen: false);
 
+  _setSelectedPharmacy(int pharmacyId, List<Pharmacy> pharmacies) {
+    if (pharmacyId == 0) {
+      return;
+    } else {
+      final pharmacy = pharmacies.firstWhere((e) => e.pharmacyId == pharmacyId);
+      _showDropdownPharmacy(pharmacy);
+    }
+  }
+
+  _showDropdownPharmacy(Pharmacy pharmacy) {
+    showModalBottomSheet(
+      useSafeArea: true,
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Container(
+            decoration:
+                BoxDecoration(color: Theme.of(context).colorScheme.secondary, borderRadius: BorderRadius.circular(25)),
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.local_pharmacy_outlined,
+                      color: Colors.red,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Flexible(
+                      child: Text(
+                        pharmacy.pharmacyName ?? 'İsim Bulunamadı',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Text(pharmacy.address ?? 'Adres bulunamadı'),
+                const SizedBox(height: 10),
+                Text(
+                  pharmacy.directions ?? '',
+                  style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    const Icon(Icons.phone),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      pharmacy.phone ?? 'Telefon Numarası bulunamadı',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                CustomMapsButton(latLng: LatLng(pharmacy.latitude!, pharmacy.longitude!))
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  _loadNearPharmaciesMarkers() async {
+    readingProvider.nearPharmaciesMarkers.clear();
+    for (var pharmacy in readingProvider.nearPharmacies) {
+      readingProvider.nearPharmaciesMarkers.add(
+        Marker(
+          markerId: MarkerId('${pharmacy.pharmacyId}'),
+          position: LatLng(pharmacy.latitude!, pharmacy.longitude!),
+          icon: AssetMapBitmap(
+            'assets/icon/pharmacy_icon.png',
+            bitmapScaling: MapBitmapScaling.auto,
+            width: 40,
+            height: 40,
+          ),
+          onTap: () {
+            _setSelectedPharmacy(pharmacy.pharmacyId ?? 0, readingProvider.nearPharmacies);
+          },
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     getLocation();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.black,
-          elevation: 0,
-          bottom: TabBar(
-            indicatorColor: Theme.of(context).colorScheme.primary,
-            labelColor: Theme.of(context).colorScheme.inversePrimary,
-            unselectedLabelColor: Theme.of(context).colorScheme.primary,
-            dividerColor: Colors.transparent,
-            tabs: const [
-              Tab(
-                child: Text('Nöbetçi Eczaneler'),
-              ),
-              Tab(
-                child: Text('Tüm Eczaneler'),
-              ),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            _buildNPharmacy(),
-            const Center(
-              child: Text('Tüm Eczaneler gösterimi şu an desteklenmemektedir'),
-            )
-          ],
-        ),
-      ),
-    );
   }
 
   Location location = Location();
@@ -85,21 +148,93 @@ class _MapViewState extends State<MapView> {
     currenPosition = LatLng(locationData.latitude!, locationData.longitude!);
 
     await readingProvider.getNearPharmacy(currenPosition!);
+    if (readingProvider.nearPharmacies.isNotEmpty) {
+      await _loadNearPharmaciesMarkers();
+    }
 
     setState(() {});
   }
 
-  Widget _buildNPharmacy() {
+  Widget _buildMapPharmacy() {
     return currenPosition == null
-        ? const Center(
-            child: Text('Loading'),
+        ? const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(
+                height: 10,
+              ),
+              Text('Yükleniyor')
+            ],
           )
         : GoogleMap(
             initialCameraPosition: CameraPosition(
               target: currenPosition!,
               zoom: 13,
             ),
-            markers: Provider.of<MapViewModel>(context, listen: false).pharmaciesMarkers,
+            myLocationEnabled: true,
+            markers: Provider.of<MapViewModel>(context, listen: false).nearPharmaciesMarkers,
           );
+  }
+
+  Widget _buildListPharmacy() {
+    return currenPosition == null
+        ? const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(
+                height: 10,
+              ),
+              Text('Yükleniyor')
+            ],
+          )
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: ListView.builder(
+              itemCount: readingProvider.nearPharmacies.length,
+              itemBuilder: (context, index) {
+                final pharmacy = readingProvider.nearPharmacies[index];
+                return CustomPharmacyTile(pharmacy: pharmacy);
+              },
+            ),
+          );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.black,
+          elevation: 0,
+          bottom: TabBar(
+            indicatorColor: Theme.of(context).colorScheme.primary,
+            labelColor: Theme.of(context).colorScheme.inversePrimary,
+            unselectedLabelColor: Theme.of(context).colorScheme.primary,
+            dividerColor: Colors.transparent,
+            tabs: const [
+              Tab(
+                child: Text('Harita'),
+              ),
+              Tab(
+                child: Text('Liste'),
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            _buildMapPharmacy(),
+            _buildListPharmacy(),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -1,9 +1,9 @@
-import 'package:eczanemnerede/core/helper/dio_helper.dart';
-import 'package:eczanemnerede/core/model/cities_model.dart';
-import 'package:eczanemnerede/core/model/pharmacy_model.dart';
-import 'package:eczanemnerede/core/model/result_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:nobetcieczane/core/helper/dio_helper.dart';
+import 'package:nobetcieczane/core/model/cities_model.dart';
+import 'package:nobetcieczane/core/model/pharmacy_model.dart';
+import 'package:nobetcieczane/core/model/result_model.dart';
 
 class Network extends ChangeNotifier {
   static Network? _instance;
@@ -15,6 +15,7 @@ class Network extends ChangeNotifier {
 
   Future<List<Cities>> getAllCitiesAndSlugs() async {
     Result result = await DioHelper.instance.dioGet('pharmacies-on-duty/cities?', Result());
+    print('cities çekildi');
     List<Cities> cities = [];
 
     for (var city in result.data) {
@@ -49,6 +50,17 @@ class Network extends ChangeNotifier {
     }
 
     return pharmacies;
+  }
+
+  Future<List<Pharmacy>> getAllPharmacyByLocation(LatLng location) async {
+    Result result = await DioHelper.instance.dioGet('pharmacies-on-duty/all?', Result());
+    List<Pharmacy> allPharmacies = [];
+
+    for (var city in result.data) {
+      allPharmacies.add(Pharmacy.fromJson(city));
+    }
+
+    return allPharmacies;
   }
 
   Future<List<Pharmacy>> getPharmacyByInformation(String city, String district) async {

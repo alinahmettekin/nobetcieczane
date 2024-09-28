@@ -1,4 +1,4 @@
-import 'package:eczanemnerede/core/model/base_model.dart';
+import 'package:nobetcieczane/core/model/base_model.dart';
 
 class Cities extends BaseModel<Cities> {
   String? cities;
