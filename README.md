@@ -1,6 +1,6 @@
-# nobetcieczane
+# Nöbetçi Ecane
 
-A new Flutter project.
+Türkiye için istediğiniz il ve ilçedeki veya en yakınınızda bulunan nöbetçi eczaneleri anında görüntülemek için yaptığım android uygulaması.
 
 ## Getting Started
 
