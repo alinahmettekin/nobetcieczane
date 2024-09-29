@@ -189,6 +189,8 @@ class _HomeViewState extends State<HomeView> {
       MaterialPageRoute(
         builder: (context) => PharmaciesView(
           pharmacies: readingProvider.pharmacies,
+          city: readingProvider.selectedCity?.cities ?? '',
+          district: readingProvider.selectedDistrict?.cities ?? '',
         ),
       ),
     );

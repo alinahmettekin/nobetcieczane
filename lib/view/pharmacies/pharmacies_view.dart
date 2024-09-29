@@ -4,9 +4,14 @@ import 'package:nobetcieczane/core/model/pharmacy_model.dart';
 
 class PharmaciesView extends StatefulWidget {
   final List<Pharmacy> pharmacies;
+  final String city;
+  final String district;
+
   const PharmaciesView({
     super.key,
     required this.pharmacies,
+    required this.city,
+    required this.district,
   });
 
   @override
@@ -19,6 +24,11 @@ class _PharmaciesViewState extends State<PharmaciesView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
+        title: Text(
+          "${widget.city} - ${widget.district} ",
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+        ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: widget.pharmacies.isEmpty

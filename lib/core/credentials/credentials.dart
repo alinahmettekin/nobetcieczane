@@ -5,7 +5,7 @@ class Credentials {
 
   String get apiKey => 'NIpnVo3q4Gbq9UQ9QPR1ogKYuqaqjzQrKVaGudvzGgBqfVxUvIT2NiPyqdog';
   String get googleApiKey => 'NIpnVo3q4Gbq9UQ9QPR1ogKYuqaqjzQrKVaGudvzGgBqfVxUvIT2NiPyqdog';
-  String get adUnitId => 'ca-app-pub-1287082868519276~8925878847';
+  String get adUnitId => 'ca-app-pub-1287082868519276/4841694993';
 
   Credentials._init();
 }

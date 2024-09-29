@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nobetcieczane/view/home/home_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -13,17 +12,6 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const HomeView(),
-          ),
-        );
-      },
-    );
   }
 
   @override

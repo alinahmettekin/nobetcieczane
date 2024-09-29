@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:nobetcieczane/core/theme/theme_provider.dart';
 import 'package:nobetcieczane/view/home/home_view.dart';
@@ -8,11 +9,12 @@ import 'package:nobetcieczane/view/map/map_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   MobileAds.instance.initialize();
   final themeProvider = ThemeProvider();
   await themeProvider.loadThemeMode();
-
+  FlutterNativeSplash.remove();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then(

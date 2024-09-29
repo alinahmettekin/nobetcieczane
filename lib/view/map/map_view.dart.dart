@@ -33,61 +33,11 @@ class _MapViewState extends State<MapView> {
       context: context,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Container(
-            decoration:
-                BoxDecoration(color: Theme.of(context).colorScheme.secondary, borderRadius: BorderRadius.circular(25)),
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.local_pharmacy_outlined,
-                      color: Colors.red,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Flexible(
-                      child: Text(
-                        pharmacy.pharmacyName ?? 'İsim Bulunamadı',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.inversePrimary,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Text(pharmacy.address ?? 'Adres bulunamadı'),
-                const SizedBox(height: 10),
-                Text(
-                  pharmacy.directions ?? '',
-                  style: TextStyle(color: Theme.of(context).colorScheme.primary),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    const Icon(Icons.phone),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      pharmacy.phone ?? 'Telefon Numarası bulunamadı',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                CustomMapsButton(latLng: LatLng(pharmacy.latitude!, pharmacy.longitude!))
-              ],
-            ),
+          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+          child: Column(
+            children: [
+              CustomPharmacyTile(pharmacy: pharmacy),
+            ],
           ),
         );
       },
@@ -211,6 +161,10 @@ class _MapViewState extends State<MapView> {
         appBar: AppBar(
           backgroundColor: Colors.red,
           foregroundColor: Colors.black,
+          title: Text(
+            'Yakınımdaki Eczaneler',
+            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+          ),
           elevation: 0,
           bottom: TabBar(
             indicatorColor: Theme.of(context).colorScheme.primary,

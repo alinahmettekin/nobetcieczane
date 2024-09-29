@@ -57,6 +57,10 @@ class CustomPharmacyTile extends StatelessWidget {
             style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
           const SizedBox(
+            height: 5,
+          ),
+          Text(pharmacy.distanceKm != null ? "${pharmacy.distanceKm!.toStringAsFixed(1)} km mesafede" : ''),
+          const SizedBox(
             height: 10,
           ),
           Row(
