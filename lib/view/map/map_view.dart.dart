@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:nobetcieczane/core/components/custom_maps_button.dart';
 import 'package:nobetcieczane/core/components/custom_pharmacy_tile.dart';
 import 'package:nobetcieczane/core/model/pharmacy_model.dart';
 import 'package:nobetcieczane/view/map/map_view_model.dart';
@@ -15,7 +14,7 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  LatLng? currenPosition;
+  LatLng? currentPosition;
   late final readingProvider = Provider.of<MapViewModel>(context, listen: false);
 
   _setSelectedPharmacy(int pharmacyId, List<Pharmacy> pharmacies) {
@@ -33,7 +32,7 @@ class _MapViewState extends State<MapView> {
       context: context,
       builder: (context) {
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
           child: Column(
             children: [
               CustomPharmacyTile(pharmacy: pharmacy),
@@ -95,9 +94,9 @@ class _MapViewState extends State<MapView> {
     }
 
     locationData = await location.getLocation();
-    currenPosition = LatLng(locationData.latitude!, locationData.longitude!);
+    currentPosition = LatLng(locationData.latitude!, locationData.longitude!);
 
-    await readingProvider.getNearPharmacy(currenPosition!);
+    await readingProvider.getNearPharmacy(currentPosition!);
     if (readingProvider.nearPharmacies.isNotEmpty) {
       await _loadNearPharmaciesMarkers();
     }
@@ -106,7 +105,7 @@ class _MapViewState extends State<MapView> {
   }
 
   Widget _buildMapPharmacy() {
-    return currenPosition == null
+    return currentPosition == null
         ? const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -120,7 +119,7 @@ class _MapViewState extends State<MapView> {
           )
         : GoogleMap(
             initialCameraPosition: CameraPosition(
-              target: currenPosition!,
+              target: currentPosition!,
               zoom: 13,
             ),
             myLocationEnabled: true,
@@ -129,7 +128,7 @@ class _MapViewState extends State<MapView> {
   }
 
   Widget _buildListPharmacy() {
-    return currenPosition == null
+    return currentPosition == null
         ? const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
