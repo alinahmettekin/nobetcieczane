@@ -41,7 +41,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
 windows
 macos
 linux
+
 android/app/src/main/AndroidManifest.xml
+app_logo_illustrator.ai
