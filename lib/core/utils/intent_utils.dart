@@ -9,10 +9,9 @@ class IntentUtils {
   static Future<void> launchGoogleMaps(LatLng latLng) async {
     double destinationLatitude = latLng.latitude;
     double destinationLongitude = latLng.longitude;
-    final uri = Uri(
-        scheme: "google.navigation",
-        // host: '"0,0"',  {here we can put host}
-        queryParameters: {'q': '$destinationLatitude, $destinationLongitude'});
+    final uri = Uri(scheme: "google.navigation", queryParameters: {
+      'q': '$destinationLatitude, $destinationLongitude',
+    });
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
@@ -22,5 +21,9 @@ class IntentUtils {
 
   static launchPhoneCall(String phone) {
     launchUrlString("tel://$phone");
+  }
+
+  static launchGooglePlay() async {
+    launch('https://play.google.com/store/apps/details?id=com.aatstdio.nobetcieczane');
   }
 }

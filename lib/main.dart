@@ -26,15 +26,15 @@ void main() async {
             ChangeNotifierProvider(create: (context) => HomeViewModel()),
             ChangeNotifierProvider(create: (context) => MapViewModel()),
           ],
-          child: const EczanemNerede(),
+          child: const NobetciEczane(),
         ),
       );
     },
   );
 }
 
-class EczanemNerede extends StatelessWidget {
-  const EczanemNerede({super.key});
+class NobetciEczane extends StatelessWidget {
+  const NobetciEczane({super.key});
 
   @override
   Widget build(BuildContext context) {

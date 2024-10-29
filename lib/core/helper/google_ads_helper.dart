@@ -11,14 +11,16 @@ class GoogleAds extends ChangeNotifier {
   GoogleAds._internal();
 
   BannerAd? bannerAd;
+  InterstitialAd? interstitialAd;
 
-  final _adUnitId = Credentials.instance.adUnitId;
+  final _bannerAdUnitId = Credentials.instance.bannerAdUnitId;
+  final _interstitialAdUnitId = Credentials.instance.interstitialAdUnitId;
 
   loadBannerAd() {
     bannerAd = BannerAd(
-      adUnitId: _adUnitId,
+      adUnitId: _bannerAdUnitId,
       request: const AdRequest(),
-      size: AdSize.largeBanner,
+      size: AdSize.banner,
       listener: BannerAdListener(
         onAdLoaded: (ad) {
           debugPrint('$ad loaded.');
@@ -29,5 +31,24 @@ class GoogleAds extends ChangeNotifier {
         },
       ),
     )..load();
+  }
+
+  void loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: _interstitialAdUnitId,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          debugPrint('$ad loaded.');
+          // Keep a reference to the ad so you can show it later.
+          interstitialAd = ad;
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (LoadAdError error) {
+          debugPrint('InterstitialAd failed to load: $error');
+        },
+      ),
+    );
   }
 }
