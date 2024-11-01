@@ -33,10 +33,35 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  void deleteSavedCity(String key) {
-    _getSaved.remove(key);
-    saveSavedCity(_getSaved);
+  setFillFieldValue(bool value) {
+    _fillFieldValue = value;
     notifyListeners();
+  }
+
+  setSelectedCity(Cities cities) {
+    selectedCity = cities;
+    selectedDistrict = null;
+    notifyListeners();
+  }
+
+  setSelectedDistrict(Cities cities) {
+    selectedDistrict = cities;
+    notifyListeners();
+  }
+
+  getCities() async {
+    _cities = await Network.instance.getAllCitiesAndSlugs();
+    notifyListeners();
+  }
+
+  void getDistrict() async {
+    _districts.clear();
+    _districts = await Network.instance.getAllDistrictsAndSlugs(selectedCity?.slug.toString() ?? '');
+    notifyListeners();
+  }
+
+  Future<void> getPharmacies(String city, String district) async {
+    _pharmacies = await Network.instance.getPharmacyByInformation(city, district);
   }
 
   String translate(String input) {
@@ -58,13 +83,6 @@ class HomeViewModel extends ChangeNotifier {
     return input.split('').map((char) {
       return translate[char] ?? char;
     }).join('');
-  }
-
-  bool isExist(String city, String district) {
-    String? key;
-    key = (city.toString() + district.toString()).toLowerCase();
-
-    return _getSaved.containsKey(key) ? true : false;
   }
 
   Future<bool> setSavedCities(String city, String district) async {
@@ -100,32 +118,16 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  setFillFieldValue(bool value) {
-    _fillFieldValue = value;
+  void deleteSavedCity(String key) {
+    _getSaved.remove(key);
+    saveSavedCity(_getSaved);
     notifyListeners();
   }
 
-  setSelectedCity(Cities cities) {
-    selectedCity = cities;
-    notifyListeners();
-  }
+  bool isExist(String city, String district) {
+    String? key;
+    key = (city.toString() + district.toString()).toLowerCase();
 
-  setSelectedDistrict(Cities cities) {
-    selectedDistrict = cities;
-    notifyListeners();
-  }
-
-  getCities() async {
-    _cities = await Network.instance.getAllCitiesAndSlugs();
-    notifyListeners();
-  }
-
-  getDistrict() async {
-    _districts = await Network.instance.getAllDistrictsAndSlugs(selectedCity?.slug.toString() ?? '');
-    notifyListeners();
-  }
-
-  Future<void> getPharmacies(String city, String district) async {
-    _pharmacies = await Network.instance.getPharmacyByInformation(city, district);
+    return _getSaved.containsKey(key) ? true : false;
   }
 }

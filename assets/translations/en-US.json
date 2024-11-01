@@ -1,0 +1,40 @@
+{
+    "app_name":"N Ö B E T Ç İ   E C Z A N E",
+    "quick_search":"You can save districts for quick search",
+    "fill_value_notifier":"Please fill city and district parameters",
+    "search_button":"Search Duty Pharmacies",
+    "choose_city":"Choose City..",
+    "choose_district":"Choose District..",
+
+    "empty_duty_pharmacies":"There is no pharmacy on duty in this district.",
+    "save_text":"Save",
+    "delete_text":"Delete",
+    "district_deleted":"District Deleted",
+    "district_saved":"District Saved",
+    "close_text":"Close",
+
+    "duty_pharmacies_map":"N Ö B E T Ç İ   E C Z A N E L E R",
+    "loading":"Loading",
+    "map_text":"Map",
+    "list_text":"List",
+
+    "settings_app_bar":"S E T T I N G S",
+    "theme_mode":"Theme",
+    "language_text":"Language",
+
+    "drawer_back":"BACK",
+    "drawer_duty_pharmacies":"PHARMACIES ON DUTY",
+    "drawer_settings":"SETTINGS",
+    "drawer_rate_us":"RATE US",
+
+    "dropdown_null_value_notifier":"Please choose city first",
+    "navigate_button":"Navigate Me",
+
+    "null_pharmacy_name":"!Pharmacy Name Not Found!",
+    "null_pharmacy_address":"!Pharmacy Address Not Found!",
+    "null_pharmacy_phone":"!Pharmacy Phone Number Not Found!",
+    "pharmacy_distance":"km",
+
+    "call_button":"Call"
+
+}
