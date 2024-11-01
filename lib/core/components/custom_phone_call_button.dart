@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nobetcieczane/core/utils/intent_utils.dart';
+import 'package:nobetcieczane/translations/locale_keys.g.dart';
 
 class CustomPhoneCallButton extends StatelessWidget {
   final String phone;
@@ -17,15 +19,15 @@ class CustomPhoneCallButton extends StatelessWidget {
           color: Colors.red,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: const Center(
+        child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.phone),
-              SizedBox(
+              const Icon(Icons.phone),
+              const SizedBox(
                 width: 10,
               ),
-              Text('Ara'),
+              Text(LocaleKeys.call_button.tr()),
             ],
           ),
         ),

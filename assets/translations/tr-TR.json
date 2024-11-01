@@ -1,0 +1,40 @@
+{
+    "app_name":"N Ö B E T Ç İ   E C Z A N E",
+    "quick_search":"Daha hızlı arama yapabilmek için ilçeleri kaydedebilirsiniz",
+    "fill_value_notifier":"Lütfen şehir ve ilçe bilgilerini doldurun",
+    "search_button":"Nöbetçi Eczane Ara",
+    "choose_city":"Şehir Seçin..",
+    "choose_district":"İlçe Seçin..",
+
+    "empty_duty_pharmacies":"Bu ilçede nöbetçi eczane bulunmamaktadır",
+    "save_text":"Kaydet",
+    "delete_text":"Sil",
+    "district_deleted":"İlçe Silindi",
+    "district_saved":"İlçe Kaydedildi",
+    "close_text":"Kapat",
+
+    "duty_pharmacies_map":"N Ö B E T Ç İ   E C Z A N E L E R",
+    "loading":"Yükleniyor",
+    "map_text":"Harita",
+    "list_text":"Liste",
+
+    "settings_app_bar":"A Y A R L A R",
+    "theme_mode":"Tema",
+    "language_text":"Dil",
+
+    "drawer_back":"GERİ",
+    "drawer_duty_pharmacies":"NÖBETÇİ ECZANELER",
+    "drawer_settings":"AYARLAR",
+    "drawer_rate_us":"BİZİ DEĞERLENDİRİN",
+
+    "dropdown_null_value_notifier":"Lütfen önce şehir seçin",
+    "navigate_button":"Yol Tarifi Al",
+
+    "null_pharmacy_name":"İsim Bulunamadı",
+    "null_pharmacy_address":"Adres Bulunamadı",
+    "null_pharmacy_phone":"Telefon Numarası Bulunamadı",
+    "pharmacy_distance":"km mesafede",
+
+    "call_button":"Ara"
+
+}

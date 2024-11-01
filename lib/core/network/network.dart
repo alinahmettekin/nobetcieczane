@@ -14,9 +14,9 @@ class Network extends ChangeNotifier {
   Network._internal();
 
   Future<List<Cities>> getAllCitiesAndSlugs() async {
-    Result result = await DioHelper.instance.dioGet('pharmacies-on-duty/cities?', Result());
+    Result? result = await DioHelper.instance.dioGet('pharmacies-on-duty/cities?', Result());
     List<Cities> cities = [];
-
+    if (result == null) return cities;
     for (var city in result.data) {
       cities.add(Cities.fromJson(city));
     }

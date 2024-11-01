@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:nobetcieczane/core/components/custom_pharmacy_tile.dart';
 import 'package:nobetcieczane/core/model/pharmacy_model.dart';
+import 'package:nobetcieczane/translations/locale_keys.g.dart';
 import 'package:nobetcieczane/view/map/map_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -106,15 +108,15 @@ class _MapViewState extends State<MapView> {
 
   Widget _buildMapPharmacy() {
     return currentPosition == null
-        ? const Column(
+        ? Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircularProgressIndicator(),
-              SizedBox(
+              const CircularProgressIndicator(),
+              const SizedBox(
                 height: 10,
               ),
-              Text('Yükleniyor')
+              Text(LocaleKeys.loading.tr())
             ],
           )
         : GoogleMap(
@@ -129,15 +131,22 @@ class _MapViewState extends State<MapView> {
 
   Widget _buildListPharmacy() {
     return currentPosition == null
-        ? const Column(
+        ? Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircularProgressIndicator(),
-              SizedBox(
+              CircularProgressIndicator(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+              const SizedBox(
                 height: 10,
               ),
-              Text('Yükleniyor')
+              Text(
+                LocaleKeys.loading.tr(),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+              )
             ],
           )
         : Padding(
@@ -158,11 +167,16 @@ class _MapViewState extends State<MapView> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.black,
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+          centerTitle: true,
           title: Text(
-            'Yakınımdaki Eczaneler',
-            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            LocaleKeys.duty_pharmacies_map.tr(),
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.inversePrimary,
+              fontSize: 18,
+            ),
           ),
           elevation: 0,
           bottom: TabBar(
@@ -170,12 +184,12 @@ class _MapViewState extends State<MapView> {
             labelColor: Theme.of(context).colorScheme.inversePrimary,
             unselectedLabelColor: Theme.of(context).colorScheme.primary,
             dividerColor: Colors.transparent,
-            tabs: const [
+            tabs: [
               Tab(
-                child: Text('Harita'),
+                child: Text(LocaleKeys.map_text.tr()),
               ),
               Tab(
-                child: Text('Liste'),
+                child: Text(LocaleKeys.list_text.tr()),
               ),
             ],
           ),

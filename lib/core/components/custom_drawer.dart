@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nobetcieczane/core/utils/intent_utils.dart';
-import 'package:nobetcieczane/view/map/map_view.dart.dart';
+import 'package:nobetcieczane/translations/locale_keys.g.dart';
 import 'package:nobetcieczane/view/settings.dart/settings_view.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -10,10 +11,9 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Drawer(
-        backgroundColor: Colors.red,
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
         child: ListView(
           children: [
-            const SizedBox(height: 10),
             const SizedBox(
               height: 25,
             ),
@@ -21,33 +21,36 @@ class CustomDrawer extends StatelessWidget {
               onTap: () => Navigator.of(context).pop(),
               leading: Icon(
                 Icons.arrow_back,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
               title: Text(
-                'GERİ',
-                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                LocaleKeys.drawer_back.tr(),
+                style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
               ),
             ),
             const SizedBox(
               height: 40,
             ),
+            // ListTile(
+            //   leading: Icon(Icons.near_me_rounded, color: Theme.of(context).colorScheme.inversePrimary),
+            //   title: Text(
+            //     LocaleKeys.drawer_duty_pharmacies.tr(),
+            //     style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+            //   ),
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(
+            //         builder: (context) => const MapView(),
+            //       ),
+            //     );
+            //   },
+            // ),
             ListTile(
-              leading: Icon(Icons.near_me, color: Theme.of(context).colorScheme.secondary),
+              leading: Icon(Icons.settings, color: Theme.of(context).colorScheme.inversePrimary),
               title: Text(
-                'NÖBETÇİ ECZANELER',
-                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
-              ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const MapView(),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings, color: Theme.of(context).colorScheme.secondary),
-              title: Text(
-                'AYARLAR',
-                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                LocaleKeys.drawer_settings.tr(),
+                style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
               ),
               onTap: () {
                 Navigator.of(context).pop();
@@ -59,10 +62,10 @@ class CustomDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.star, color: Theme.of(context).colorScheme.secondary),
+              leading: Icon(Icons.star, color: Theme.of(context).colorScheme.inversePrimary),
               title: Text(
-                'BİZİ DEĞERLENDİRİN',
-                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                LocaleKeys.drawer_rate_us.tr(),
+                style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
               ),
               onTap: () {
                 Navigator.of(context).pop();

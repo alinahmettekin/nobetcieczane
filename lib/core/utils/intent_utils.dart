@@ -24,6 +24,7 @@ class IntentUtils {
   }
 
   static launchGooglePlay() async {
+    // ignore: deprecated_member_use
     launch('https://play.google.com/store/apps/details?id=com.aatstdio.nobetcieczane');
   }
 }

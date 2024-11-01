@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nobetcieczane/core/components/custom_pharmacy_tile.dart';
 import 'package:nobetcieczane/core/model/pharmacy_model.dart';
+import 'package:nobetcieczane/translations/locale_keys.g.dart';
 import 'package:nobetcieczane/view/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +28,8 @@ class _PharmaciesViewState extends State<PharmaciesView> {
 
   @override
   void initState() {
-    saveOption = readingProvider.isExist(widget.city, widget.district) ? 'Sil' : 'Kaydet';
+    saveOption =
+        readingProvider.isExist(widget.city, widget.district) ? LocaleKeys.delete_text.tr() : LocaleKeys.save_text.tr();
     super.initState();
   }
 
@@ -34,15 +37,15 @@ class _PharmaciesViewState extends State<PharmaciesView> {
     String? message;
 
     if (response) {
-      message = "İlçe Kaydedildi";
+      message = LocaleKeys.district_saved.tr();
     } else {
-      message = "İlçe Silindi";
+      message = LocaleKeys.district_deleted.tr();
     }
     final snackBar = SnackBar(
       content: Text(message),
       duration: const Duration(seconds: 2),
       action: SnackBarAction(
-        label: 'Kapat',
+        label: LocaleKeys.close_text.tr(),
         onPressed: () {
           // Snackbar'ı kapatma işlevi
         },
@@ -56,10 +59,14 @@ class _PharmaciesViewState extends State<PharmaciesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        centerTitle: true,
         title: Text(
-          "${widget.city} - ${widget.district} ",
-          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+          "${widget.city.toUpperCase()} - ${widget.district.toUpperCase()} ",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontSize: 18,
+          ),
         ),
         actions: [
           TextButton(
@@ -68,20 +75,20 @@ class _PharmaciesViewState extends State<PharmaciesView> {
                 String key = (widget.city.toString() + widget.district.toString()).toLowerCase();
                 readingProvider.deleteSavedCity(key);
                 setState(() {
-                  saveOption = 'Kaydet';
+                  saveOption = LocaleKeys.save_text.tr();
                 });
                 showSaveSnackBar(false);
               } else {
                 await readingProvider.setSavedCities(widget.city, widget.district);
                 setState(() {
-                  saveOption = 'Sil';
+                  saveOption = LocaleKeys.delete_text.tr();
                 });
                 showSaveSnackBar(true);
               }
             },
             child: Text(
               saveOption,
-              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+              style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
             ),
           )
         ],
@@ -91,10 +98,10 @@ class _PharmaciesViewState extends State<PharmaciesView> {
           child: Column(
             children: [
               widget.pharmacies.isEmpty
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Center(
-                        child: Text('Bu ilçede nöbetçi eczane bulunmamaktadır'),
+                        child: Text(LocaleKeys.empty_duty_pharmacies.tr()),
                       ),
                     )
                   : Padding(
