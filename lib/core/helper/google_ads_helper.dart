@@ -15,8 +15,8 @@ class GoogleAds extends ChangeNotifier {
   BannerAd? bannerAd;
   InterstitialAd? interstitialAd;
 
-  final _bannerAdUnitId = Credentials.instance.bannerAdUnitId;
-  final _interstitialAdUnitId = Credentials.instance.interstitialAdUnitId;
+  final _bannerAdUnitId = Credentials.instance.testBannerAdUnitId;
+  final _interstitialAdUnitId = Credentials.instance.testInterstitialAdUnitId;
 
   loadBannerAd() async {
     List<ConnectivityResult> connectivityResult = await NetworkUtils.instance.checkConnections();

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nobetcieczane/translations/locale_keys.g.dart';
 import 'package:nobetcieczane/view/home/home_view_model.dart';
@@ -27,8 +28,10 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
               // widget.value 0 ise cities, 1 ise districts listesini kontrol et
               final items = widget.value == 0 ? provider.cities : provider.districts;
               if ((widget.value == 1 && provider.selectedCity == null)) {
-                return const Center(
-                  child: Text(LocaleKeys.dropdown_null_value_notifier),
+                return Center(
+                  child: Text(
+                    LocaleKeys.dropdown_null_value_notifier.tr(),
+                  ),
                 );
               } else if (((widget.value == 1 && provider.districts.isEmpty)) ||
                   (widget.value == 0 && provider.cities.isEmpty)) {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:nobetcieczane/core/model/cities_model.dart';
@@ -11,11 +12,15 @@ class HomeViewModel extends ChangeNotifier {
   List<Cities> _districts = [];
   List<Pharmacy> _pharmacies = [];
   Map<String, dynamic> _getSaved = {};
+  List<String> _lastSearch = [];
+  bool _isLastSearch = false;
 
   List<Cities> get cities => _cities;
   List<Cities> get districts => _districts;
   List<Pharmacy> get pharmacies => _pharmacies;
   Map<String, dynamic> get getSaved => _getSaved;
+  List<String> get lastSearch => _lastSearch;
+  bool get isLastSearch => _isLastSearch;
 
   Cities? selectedCity;
   Cities? selectedDistrict;
@@ -31,6 +36,11 @@ class HomeViewModel extends ChangeNotifier {
     if (_searchCount == 2) {
       _searchCount = 0;
     }
+  }
+
+  setIsLastSearch() {
+    _isLastSearch = !_isLastSearch;
+    notifyListeners();
   }
 
   setFillFieldValue(bool value) {
@@ -99,6 +109,35 @@ class HomeViewModel extends ChangeNotifier {
       notifyListeners();
       return true;
     }
+  }
+
+  Future<void> setLastSearch(String city, String district) async {
+    final prefs = await SharedPreferences.getInstance();
+    _lastSearch = [city, district, translate(city.toLowerCase()), translate(district.toLowerCase())];
+    await prefs.setStringList('lastSearch', _lastSearch);
+  }
+
+  Future<void> getLastSearch() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String>? prefList = prefs.getStringList('lastSearch');
+
+    if (prefList == null) {
+      log("kanki veri null geldi");
+      return;
+    }
+
+    Cities city = Cities();
+    Cities district = Cities();
+    city.cities = prefList[0];
+    city.slug = prefList[2];
+
+    district.cities = prefList[1];
+    district.slug = prefList[3];
+
+    selectedCity = city;
+    selectedDistrict = district;
+
+    _isLastSearch = true;
   }
 
   Future<void> saveSavedCity(Map<String, dynamic> mapData) async {

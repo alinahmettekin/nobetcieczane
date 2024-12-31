@@ -40,6 +40,7 @@ class _HomeViewState extends State<HomeView> {
   Future<void> _initialize() async {
     await _loadCityAndDistrict();
     await _loadSavedCities();
+    await _loadLastSearch();
     setState(() {
       isHomePageLoading = false;
     });
@@ -51,6 +52,10 @@ class _HomeViewState extends State<HomeView> {
 
   _loadCityAndDistrict() async {
     await readingProvider.getCities();
+  }
+
+  _loadLastSearch() async {
+    await readingProvider.getLastSearch();
   }
 
   void _showDropdownMenu(int value) {
@@ -186,7 +191,14 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       CustomCityButton(
                         text: listeningProvider.selectedDistrict?.cities ?? LocaleKeys.choose_district.tr(),
-                        onPressed: () => _showDropdownMenu(1),
+                        onPressed: () async {
+                          final isLastSearch = readingProvider.isLastSearch;
+                          if (isLastSearch) {
+                            readingProvider.getDistrict();
+                            readingProvider.setIsLastSearch();
+                          }
+                          _showDropdownMenu(1);
+                        },
                       ),
                       const SizedBox(
                         height: 10,
@@ -226,6 +238,8 @@ class _HomeViewState extends State<HomeView> {
                               readingProvider.setSearchCount();
                               await readingProvider.getPharmacies(
                                   readingProvider.selectedCity!.slug!, readingProvider.selectedDistrict!.slug!);
+                              readingProvider.setLastSearch(
+                                  readingProvider.selectedCity!.cities!, readingProvider.selectedDistrict!.cities!);
                               _navigatePharmaciesView(readingProvider.selectedCity!, readingProvider.selectedDistrict!);
                               isLoading = false;
                             } else {
