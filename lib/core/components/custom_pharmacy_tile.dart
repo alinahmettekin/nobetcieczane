@@ -45,7 +45,7 @@ class CustomPharmacyTile extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            pharmacy.address ?? LocaleKeys.null_pharmacy_address,
+            pharmacy.address ?? LocaleKeys.null_pharmacy_address.tr(),
           ),
           const SizedBox(height: 10),
           Row(
