@@ -1,33 +1,42 @@
 {
     "app_name":"N Ö B E T Ç İ   E C Z A N E",
     "quick_search":"Daha hızlı arama yapabilmek için ilçeleri kaydedebilirsiniz",
-    "fill_value_notifier":"Lütfen şehir ve ilçe bilgilerini doldurun",
-    "search_button":"Nöbetçi Eczane Ara",
+    "snackbar_choose_city_district":"Lütfen şehir ve ilçe seçin",
+    "snackbar_choose_city":"Lütfen önce şehir seçin",
+    "search_text":"Ara",
     "choose_city":"Şehir Seçin..",
     "choose_district":"İlçe Seçin..",
+    "look_up_city_list":"Şehir listesine göz atın",
+    "look_up_district_list":"İlçe listesine göz atın",
+    "require_location_permission":"Konum İzni Gerekli, Lütfen Ayarlardan Konum İznini Kabul Edin", 
+    "confirm_pharmacy":"Eczanelere gitmeden önce arayıp teyit etmeniz önerilir.", 
 
-    "empty_duty_pharmacies":"Bu ilçede nöbetçi eczane bulunmamaktadır",
+    "no_internet_connection":"İnternet Bağlantısı Yok",
+    "near_pharmacies_button_title":"Yakınımdaki Eczaneler",
+    "near_pharmacies_button_subtitle":"Yakınınızdaki nöbetçi eczaneleri görüntüleyin",
+
+    "no_duty_pharmacies":"Bu ilçede nöbetçi eczane bulunmamaktadır",
     "save_text":"Kaydet",
     "delete_text":"Sil",
     "district_deleted":"İlçe Silindi",
     "district_saved":"İlçe Kaydedildi",
     "close_text":"Kapat",
 
-    "duty_pharmacies_map":"N Ö B E T Ç İ   E C Z A N E L E R",
+    "map_view_app_bar":"Harita",
     "loading":"Yükleniyor",
     "map_text":"Harita",
     "list_text":"Liste",
 
-    "settings_app_bar":"A Y A R L A R",
-    "theme_mode":"Tema",
-    "language_text":"Dil",
+    "settings_view_app_bar":"Ayarlar",
+    "dark_theme":"Tema",
+    "language":"Dil",
 
     "drawer_back":"GERİ",
     "drawer_duty_pharmacies":"NÖBETÇİ ECZANELER",
     "drawer_settings":"AYARLAR",
     "drawer_rate_us":"BİZİ DEĞERLENDİRİN",
 
-    "dropdown_null_value_notifier":"Lütfen önce şehir seçin",
+   
     "navigate_button":"Yol Tarifi Al",
 
     "null_pharmacy_name":"İsim Bulunamadı",

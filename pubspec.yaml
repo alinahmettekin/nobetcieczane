@@ -3,32 +3,47 @@ description: "."
 
 publish_to: "none"
 
-version: 1.1.0+8
+version: 2.0.0+9
 
 environment:
   sdk: ^3.5.3
 
 dependencies:
+  connectivity_plus: ^6.1.0
+
+  dio: ^5.7.0
+
+  easy_localization: ^3.0.7
+
   flutter:
     sdk: flutter
 
-  provider: ^6.1.2
-  google_maps_flutter: ^2.9.0
-  shared_preferences: ^2.3.2
-  dio: ^5.7.0
-  location: ^6.0.2
-  url_launcher: ^6.3.0
-  google_mobile_ads: ^5.1.0
+  flutter_bloc: ^8.1.6
+
   flutter_native_splash: ^2.4.1
-  easy_localization: ^3.0.7
-  connectivity_plus: ^6.1.0
+
+  fpdart: ^1.1.1
+
+  get_it: ^8.0.3
+
+  google_maps_flutter: ^2.10.0
+
+  google_mobile_ads: ^5.2.0
+
+  internet_connection_checker_plus: ^2.7.0
+
+  location: ^6.0.2
+
+  shared_preferences: ^2.3.2
+
+  url_launcher: ^6.3.0
 
 dev_dependencies:
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
   rename: ^3.0.2
-
-  flutter_lints: ^4.0.0
+  very_good_analysis: ^7.0.0
 
 flutter:
   uses-material-design: true
@@ -36,9 +51,12 @@ flutter:
   assets:
     - assets/icon/
     - assets/translations/
+    - assets/logo/
+    - assets/map_styles/
 
 flutter_native_splash:
-  color: "ff3232"
+  color: "#ff3232" # Arka plan rengini kırmızı yapar
   android_12:
-    color: "#ff3232"
-  color_android: "#ff3232"
+    color: "#ff3232" # Android 12'de arka plan rengi
+  ios: true # iOS desteği
+  android: true # Android desteği
