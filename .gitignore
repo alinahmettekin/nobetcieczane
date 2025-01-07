@@ -48,4 +48,7 @@ linux
 
 android/app/src/main/AndroidManifest.xml
 app_logo_illustrator.ai
-lib/core/credentials/credentials.dart
+
+# Environment configuration
+.env
+*.g.dart

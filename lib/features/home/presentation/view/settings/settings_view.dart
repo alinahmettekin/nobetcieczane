@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nobetcieczane/core/constants/image_constants.dart';
+import 'package:nobetcieczane/core/init/lang/translations/language_manager.dart';
 import 'package:nobetcieczane/core/init/lang/translations/locale_keys.g.dart';
 import 'package:nobetcieczane/core/init/theme/cubit/theme_cubit.dart';
 
@@ -20,7 +22,7 @@ class _SettingsViewState extends State<SettingsView> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          LocaleKeys.settings_view_app_bar.tr(),
+          LocaleKeys.settings_app_bar_title.tr(),
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -41,7 +43,7 @@ class _SettingsViewState extends State<SettingsView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    LocaleKeys.dark_theme.tr(),
+                    LocaleKeys.settings_dark_theme.tr(),
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Switch(
@@ -63,27 +65,28 @@ class _SettingsViewState extends State<SettingsView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    LocaleKeys.language.tr(),
+                    LocaleKeys.settings_language.tr(),
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   IconButton(
                     onPressed: () async {
-                      final locale =
-                          EasyLocalization.of(context)!.locale.toString();
-                      if (locale == 'tr_TR') {
-                        await context.setLocale(const Locale('en', 'US'));
+                      final locale = EasyLocalization.of(context)!.locale;
+                      if (locale == LanguageManager.instance.trLocale) {
+                        await context
+                            .setLocale(LanguageManager.instance.enLocale);
                       } else {
-                        await context.setLocale(const Locale('tr', 'TR'));
+                        await context
+                            .setLocale(LanguageManager.instance.trLocale);
                       }
                     },
-                    icon: EasyLocalization.of(context)!.locale.toString() ==
-                            'tr_TR'
+                    icon: EasyLocalization.of(context)!.locale ==
+                            LanguageManager.instance.trLocale
                         ? Image.asset(
-                            'assets/icon/turkey_icon.png',
+                            ImageConstants.turkiyeIcon,
                             height: 40,
                           )
                         : Image.asset(
-                            'assets/icon/united_kingdom.png',
+                            ImageConstants.ukIcon,
                             height: 40,
                           ),
                   ),

@@ -19,7 +19,7 @@ mixin _HomeViewMixin on State<HomeView> {
 
   Widget _buildSearchButton() {
     return SearchButton(
-      title: LocaleKeys.search_text.tr(),
+      title: LocaleKeys.home_searh.tr(),
       onTap: _navigateToPharmaciesView,
       icon: Icons.arrow_forward_ios,
     );
@@ -34,7 +34,7 @@ mixin _HomeViewMixin on State<HomeView> {
           height: 75,
           width: double.infinity,
           child: LocationButton(
-            title: LocaleKeys.near_pharmacies_button_title.tr(),
+            title: LocaleKeys.buttons_location.tr(),
             onTap: () => navigateToMapView(context),
           ),
         ),
@@ -66,7 +66,7 @@ mixin _HomeViewMixin on State<HomeView> {
     context.read<HomeBloc>().add(HomeGetCities());
     final selectedCity = await showDropdownListMenu(
       context,
-      title: LocaleKeys.choose_city.tr(),
+      title: LocaleKeys.home_choose_city.tr(),
       itemsSelector: (state) =>
           state is HomeGetCitiesSuccess ? state.cities : null,
     );
@@ -84,7 +84,7 @@ mixin _HomeViewMixin on State<HomeView> {
         .add(HomeGetDistricts(citySlug: _selectedCity!.slug));
     final selectedDistrict = await showDropdownListMenu(
       context,
-      title: LocaleKeys.choose_district.tr(),
+      title: LocaleKeys.home_choose_district.tr(),
       itemsSelector: (state) =>
           state is HomeGetDistrictsSuccess ? state.districts : null,
     );
@@ -133,7 +133,11 @@ mixin _HomeViewMixin on State<HomeView> {
     if (userLocation == null) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(LocaleKeys.require_location_permission.tr())),
+          SnackBar(
+            content: Text(
+              LocaleKeys.snackbar_require_location_permission.tr(),
+            ),
+          ),
         );
       }
       return;

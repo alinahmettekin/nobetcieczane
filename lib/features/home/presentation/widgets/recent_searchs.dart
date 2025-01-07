@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:nobetcieczane/core/init/lang/translations/locale_keys.g.dart';
+import 'package:nobetcieczane/core/init/theme/cubit/light/color_scheme_light.dart';
 
 /// Recent searches widget that shows the recent searches of the user.
 class RecentSearchs extends StatelessWidget {
@@ -37,9 +40,9 @@ class RecentSearchs extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Son aramalar',
-                  style: TextStyle(
+                Text(
+                  LocaleKeys.home_recent_recent_searches.tr(),
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                   ),
@@ -48,15 +51,14 @@ class RecentSearchs extends StatelessWidget {
                   onPressed: () {
                     _showApproveDialog(
                       context: context,
-                      title: 'Tüm Aramaları Sil',
-                      content:
-                          'Tüm aramaları silmek istediğinizden emin misiniz?',
+                      title: LocaleKeys.home_recent_clear_all_search.tr(),
+                      content: LocaleKeys.home_recent_approve_clear_search.tr(),
                       onApprove: onClearAll,
                     );
                   },
-                  child: const Text(
-                    'Tümünü Sil',
-                    style: TextStyle(color: Colors.red),
+                  child: Text(
+                    LocaleKeys.home_recent_clear_all.tr(),
+                    style: TextStyle(color: ColorSchemeLight.instance.red),
                   ),
                 ),
               ],
@@ -81,10 +83,10 @@ class RecentSearchs extends StatelessWidget {
                             /// no time to fix this
                             // ignore: deprecated_member_use
                             backgroundColor: Colors.blueAccent.withOpacity(0.1),
-                            child: const Icon(
+                            child: Icon(
                               Icons.history,
                               size: 24,
-                              color: Colors.red,
+                              color: ColorSchemeLight.instance.red,
                             ),
                           ),
                           SizedBox(
@@ -113,16 +115,18 @@ class RecentSearchs extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.delete_outline,
-                              color: Colors.red,
+                              color: ColorSchemeLight.instance.red,
                             ),
                             onPressed: () {
                               _showApproveDialog(
                                 context: context,
-                                title: 'Aramayı sil',
-                                content:
-                                    'Aramayı silmek istediğinize emin misiniz?',
+                                title:
+                                    LocaleKeys.home_recent_delete_search.tr(),
+                                content: LocaleKeys
+                                    .home_recent_approve_delete_search
+                                    .tr(),
                                 onApprove: () => onDeleteItem(search),
                               );
                             },
@@ -154,14 +158,19 @@ class RecentSearchs extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('İPTAL'),
+            child: Text(LocaleKeys.home_recent_cancel.tr()),
           ),
           TextButton(
             onPressed: () {
               onApprove();
               Navigator.pop(context);
             },
-            child: const Text('SİL', style: TextStyle(color: Colors.red)),
+            child: Text(
+              LocaleKeys.home_recent_delete.tr(),
+              style: TextStyle(
+                color: ColorSchemeLight.instance.red,
+              ),
+            ),
           ),
         ],
       ),

@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nobetcieczane/core/base/entities/pharmacy.dart';
+import 'package:nobetcieczane/core/constants/image_constants.dart';
 import 'package:nobetcieczane/core/init/lang/translations/locale_keys.g.dart';
+import 'package:nobetcieczane/core/init/theme/cubit/light/color_scheme_light.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/button/call_button.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/button/navigate_button.dart';
 
@@ -33,17 +35,17 @@ class CustomPharmacyCard extends StatelessWidget {
           Row(
             children: [
               Image.asset(
-                'assets/logo/app_logo.png',
+                ImageConstants.appLogo,
                 width: 30,
                 height: 30,
-                color: Colors.red,
+                color: ColorSchemeLight.instance.red,
               ),
               const SizedBox(
                 width: 10,
               ),
               Flexible(
                 child: Text(
-                  pharmacy.pharmacyName ?? LocaleKeys.null_pharmacy_name.tr(),
+                  pharmacy.pharmacyName ?? '',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -54,7 +56,7 @@ class CustomPharmacyCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            pharmacy.address ?? LocaleKeys.null_pharmacy_address.tr(),
+            pharmacy.address ?? '',
           ),
           const SizedBox(height: 10),
           Row(
@@ -64,7 +66,7 @@ class CustomPharmacyCard extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                pharmacy.phone ?? LocaleKeys.null_pharmacy_phone.tr(),
+                pharmacy.phone ?? '',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
@@ -79,7 +81,7 @@ class CustomPharmacyCard extends StatelessWidget {
           Text(
             pharmacy.distanceKm != null
                 ? '${pharmacy.distanceKm!.toStringAsFixed(1)} '
-                    '${LocaleKeys.pharmacy_distance.tr()}'
+                    '${LocaleKeys.pharmacy_info_distance.tr()}'
                 : '',
           ),
           const SizedBox(
@@ -92,8 +94,7 @@ class CustomPharmacyCard extends StatelessWidget {
                 SizedBox(
                   width: 100,
                   child: CallButton(
-                    phoneNumber:
-                        pharmacy.phone ?? LocaleKeys.null_pharmacy_phone.tr(),
+                    phoneNumber: pharmacy.phone ?? '',
                   ),
                 ),
               const SizedBox(width: 5),

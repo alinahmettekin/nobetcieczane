@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:nobetcieczane/core/constants/constants.dart';
-import 'package:nobetcieczane/core/credentials/credentials.dart';
 import 'package:nobetcieczane/core/error/service_exception.dart';
+import 'package:nobetcieczane/env.dart';
 
 /// A service class that provides HTTP functionality.
 abstract interface class HttpService {
@@ -17,7 +17,7 @@ class DioServiceImpl implements HttpService {
   /// DioServiceImpl constructor
   DioServiceImpl({required this.dio}) {
     dio.options.baseUrl = Constants.nosyApiBaseUrl;
-    dio.options.queryParameters = {'apiKey': Credentials.instance.apiKey};
+    dio.options.queryParameters = {'apiKey': Env.nosyApiKey};
   }
 
   /// Dio is a final variable of type Dio

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nobetcieczane/core/base/entities/pharmacy.dart';
+import 'package:nobetcieczane/core/constants/image_constants.dart';
 import 'package:nobetcieczane/core/helper/ad_mob_helper.dart';
 import 'package:nobetcieczane/core/init/lang/translations/locale_keys.g.dart';
+import 'package:nobetcieczane/core/init/theme/cubit/light/color_scheme_light.dart';
 import 'package:nobetcieczane/features/home/presentation/bloc/home_bloc.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/custom_pharmacy_card.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/loader.dart';
@@ -45,13 +47,13 @@ class _MapViewState extends State<MapView> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          LocaleKeys.map_view_app_bar.tr(),
+          LocaleKeys.map_app_bar_title.tr(),
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: ColorSchemeLight.instance.red,
       ),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
@@ -103,7 +105,7 @@ class _MapViewState extends State<MapView> {
                     : '${pharmacy.distanceKm!.toStringAsFixed(2)} km',
               ),
               icon: AssetMapBitmap(
-                'assets/icon/pharmacy_icon.png',
+                ImageConstants.pharmacyIcon,
                 width: 45,
                 height: 45,
               ),

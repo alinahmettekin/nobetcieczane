@@ -1,49 +1,68 @@
 {
-    "app_name":"N Ö B E T Ç İ   E C Z A N E",
-    "quick_search":"Daha hızlı arama yapabilmek için ilçeleri kaydedebilirsiniz",
-    "snackbar_choose_city_district":"Lütfen şehir ve ilçe seçin",
-    "snackbar_choose_city":"Lütfen önce şehir seçin",
-    "search_text":"Ara",
-    "choose_city":"Şehir Seçin..",
-    "choose_district":"İlçe Seçin..",
-    "look_up_city_list":"Şehir listesine göz atın",
-    "look_up_district_list":"İlçe listesine göz atın",
-    "require_location_permission":"Konum İzni Gerekli, Lütfen Ayarlardan Konum İznini Kabul Edin", 
-    "confirm_pharmacy":"Eczanelere gitmeden önce arayıp teyit etmeniz önerilir.", 
+   "loading":"Yükleniyor",
 
-    "no_internet_connection":"İnternet Bağlantısı Yok",
-    "near_pharmacies_button_title":"Yakınımdaki Eczaneler",
-    "near_pharmacies_button_subtitle":"Yakınınızdaki nöbetçi eczaneleri görüntüleyin",
+   "drawer":{
+       "settings":"AYARLAR",
+       "rate_us":"BİZİ DEĞERLENDİRİN",
+       "back":"GERİ"
+   },
 
-    "no_duty_pharmacies":"Bu ilçede nöbetçi eczane bulunmamaktadır",
-    "save_text":"Kaydet",
-    "delete_text":"Sil",
-    "district_deleted":"İlçe Silindi",
-    "district_saved":"İlçe Kaydedildi",
-    "close_text":"Kapat",
+   "home": {
+       "searh": "ARA",
+       "choose_city": "Şehir Seçin..",
+       "choose_district": "İlçe Seçin..",
+       "look_up_city": "Şehir listesine göz atın",
+       "look_up_district": "İlçe listesine göz atın",
+       "recent" : {
+            "recent_searches": "Son Aramalar",
+            "delete_search": "Aramayı Sil",
+            "clear_all": "Tümünü Sil",
+            "clear_all_search":"Tüm Aramaları Sil",
+            "approve_delete_search":"Aramayı silmek istediğinize emin misiniz?",
+            "approve_clear_search":"Tüm aramaları silmek istediğinize emin misiniz?",
+            "delete" :"SİL",
+            "cancel":"İPTAL"
+       }
+   },
 
-    "map_view_app_bar":"Harita",
-    "loading":"Yükleniyor",
-    "map_text":"Harita",
-    "list_text":"Liste",
+   "map":{
+       "app_bar_title":"HARİTA"
 
-    "settings_view_app_bar":"Ayarlar",
-    "dark_theme":"Tema",
-    "language":"Dil",
+   },
 
-    "drawer_back":"GERİ",
-    "drawer_duty_pharmacies":"NÖBETÇİ ECZANELER",
-    "drawer_settings":"AYARLAR",
-    "drawer_rate_us":"BİZİ DEĞERLENDİRİN",
+   "pharmacies" : {
+       "no_duty_pharmacies": "Bu ilçede nöbetçi eczane bulunmamaktadır."
+   },
 
-   
-    "navigate_button":"Yol Tarifi Al",
+   "settings": {
+       "app_bar_title":"AYARLAR",
+       "dark_theme":"Karanlık Tema",
+       "language":"Dil"
+   },
 
-    "null_pharmacy_name":"İsim Bulunamadı",
-    "null_pharmacy_address":"Adres Bulunamadı",
-    "null_pharmacy_phone":"Telefon Numarası Bulunamadı",
-    "pharmacy_distance":"km mesafede",
+   "buttons": {
+       "navigate": "Yol Tarifi Al",
+       "call": "Ara",
+       "location":"Yakınımdaki Eczaneler"
+   },
 
-    "call_button":"Ara"
+   "pharmacy_info": {
+       "name": "Eczane Adı",
+       "address": "Adres",
+       "phone": "Telefon",
+       "distance": "km"
+   },
+
+   "snackbar": {
+       "choose_city_district": "Lütfen şehir ve ilçe seçin",
+       "choose_city": "Lütfen şehir seçin",
+       "require_location_permission": "Konum İzni Gerekli, Lütfen Dialog Ekranından Veya Ayarlardan Konum İzni Verin",
+       "confirm_pharmacy": "Eczaneye gitmeden önce arayıp teyit etmeniz önerilir.",
+       "no_internet_connection": "İnternet Bağlantısı Yok"
+   },
+
+   "dialog": {
+        "":""
+   }
 
 }

@@ -1,26 +1,27 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:nobetcieczane/core/credentials/credentials.dart';
+import 'package:nobetcieczane/env.dart';
 
 /// AdConfig is a class that contains the ad configuration
 class AdConfig {
+  /// _isDebug using for the know the app is in debug mode or not
   static const bool _isDebug = kDebugMode;
 
   /// firstBannerAdUnitId is a AdMob banner ad unit id
   static String get firstBannerAdUnitId => _isDebug
-      ? 'ca-app-pub-3940256099942544/6300978111' // Test ID
-      : Credentials.instance.homeBannerAdUnitId;
+      ? Env.testBannerId // Test ID
+      : Env.bannerIdI;
 
   /// secondBannerAdUnitId is a AdMob banner ad unit id
   static String get secondBannerAdUnitId => _isDebug
-      ? 'ca-app-pub-3940256099942544/6300978111' // Test ID
-      : Credentials.instance.mapBannerAdUnitId;
+      ? Env.testBannerId // Test ID
+      : Env.bannerIdII;
 
   /// thirdBannerAdUnitId is a AdMob banner ad unit id
   static String get thirdBannerAdUnitId => _isDebug
-      ? 'ca-app-pub-3940256099942544/6300978111' // Test ID
-      : Credentials.instance.pharmaciesBannerAdUnitId;
+      ? Env.testBannerId // Test ID
+      : Env.bannerIdIII;
 }
 
 /// BannerAdType is an enum that contains the banner ad types
@@ -94,7 +95,7 @@ class _AdMobBannerWidgetState extends State<AdMobBannerWidget> {
     await _bannerAd?.dispose();
     _bannerAd = BannerAd(
       adUnitId: _adUnitId,
-      size: AdSize.banner, // İki banner da aynı boyutta ise
+      size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (ad) {

@@ -18,4 +18,8 @@ class ThemeState {
 
   /// theme is using for changing the theme of the app.
   final AppTheme theme;
+
+  ThemeData get lightTheme => ThemeData.light();
+
+  ThemeData get darkTheme => ThemeData.dark();
 }

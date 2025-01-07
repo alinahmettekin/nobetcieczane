@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nobetcieczane/core/base/entities/pharmacy.dart';
 import 'package:nobetcieczane/core/helper/ad_mob_helper.dart';
 import 'package:nobetcieczane/core/init/lang/translations/locale_keys.g.dart';
+import 'package:nobetcieczane/core/init/theme/cubit/light/color_scheme_light.dart';
 import 'package:nobetcieczane/features/home/presentation/bloc/home_bloc.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/custom_pharmacy_card.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/loader.dart';
@@ -32,7 +33,7 @@ class PharmaciesView extends StatelessWidget {
           '$city - $district',
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: ColorSchemeLight.instance.red,
       ),
       body: Stack(
         children: [
@@ -42,7 +43,7 @@ class PharmaciesView extends StatelessWidget {
                 if (state.pharmacies.isEmpty) {
                   return Center(
                     child: Text(
-                      LocaleKeys.no_duty_pharmacies.tr(),
+                      LocaleKeys.pharmacies_no_duty_pharmacies.tr(),
                       style: const TextStyle(),
                     ),
                   );

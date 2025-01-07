@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nobetcieczane/core/init/theme/cubit/light/color_scheme_light.dart';
 
 /// SearchButton is a StatelessWidget that contains the search button.
 class SearchButton extends StatelessWidget {
@@ -32,7 +33,7 @@ class SearchButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: Card(
             elevation: 4,
-            color: Colors.red,
+            color: ColorSchemeLight.instance.red,
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Row(

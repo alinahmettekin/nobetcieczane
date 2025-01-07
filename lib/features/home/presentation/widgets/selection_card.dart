@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nobetcieczane/core/init/theme/cubit/light/color_scheme_light.dart';
 
 /// SelectionButton is a StatelessWidget that contains the selection button.
 class SelectionButton extends StatelessWidget {
@@ -44,8 +45,14 @@ class SelectionButton extends StatelessWidget {
                   const SizedBox(width: 10),
                   CircleAvatar(
                     radius: 24,
-                    backgroundColor: Colors.blueAccent.withValues(alpha: 0.1),
-                    child: Icon(icon, size: 24, color: Colors.red),
+                    backgroundColor: Colors.blueAccent.withValues(
+                      alpha: 0.1,
+                    ),
+                    child: Icon(
+                      icon,
+                      size: 24,
+                      color: ColorSchemeLight.instance.red,
+                    ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(

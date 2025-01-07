@@ -1,48 +1,64 @@
 {
-    "app_name":"N Ö B E T Ç İ   E C Z A N E",
-    "quick_search":"You can save districts for quick search",
-    "snackbar_choose_city_district":"Please choose city and district",
-    "snackbar_choose_city":"Please choose city",
-    "search_text":"Search",
-    "choose_city":"Choose City..",
-    "choose_district":"Choose District..",
-    "look_up_city_list":"Look up city list",
-    "look_up_district_list":"Look up district list",
-    "require_location_permission":"Location Permission Required, Please Allow Location Permission From Settings",
-    "confirm_pharmacy":"It is recommended that you call and confirm before going to pharmacies.",    
-    "no_internet_connection":"No Internet Connection",
-    "near_pharmacies_button_title":"Nearby Pharmacies",
-    "near_pharmacies_button_subtitle":"View on duty pharmacies near you",
-
-    "no_duty_pharmacies":"There is no pharmacy on duty in this district.",
-    "save_text":"Save",
-    "delete_text":"Delete",
-    "district_deleted":"District Deleted",
-    "district_saved":"District Saved",
-    "close_text":"Close",
-
-    "map_view_app_bar":"Map",
     "loading":"Loading",
-    "map_text":"Map",
-    "list_text":"List",
-    
-    "settings_view_app_bar":"Settings",
-    "dark_theme":"Theme",
-    "language":"Language",
 
-    "drawer_back":"BACK",
-    "drawer_duty_pharmacies":"",
-    "drawer_settings":"SETTINGS",
-    "drawer_rate_us":"RATE US",
+    "drawer":{
+        "settings":"SETTINGS",
+        "rate_us":"RATE US",
+        "back":"BACK"
+    },
 
-   
-    "navigate_button":"Navigate Me",
+    "home": {
+        "searh": "Search",
+        "choose_city": "Choose City..",
+        "choose_district": "Choose District..",
+        "look_up_city": "Look up city list",
+        "look_up_district": "Look up district list",
+        "recent" : {
+            "recent_searches": "Last Searches",
+            "delete_search": "Delete Search",
+            "clear_all": "Delete All",
+            "clear_all_search":"Delete All Searches",
+            "approve_delete_search":"Are you sure you want to delete the search?",
+            "approve_clear_search":"Are you sure you want to delete all searches?",
+            "delete" :"DELETE",
+            "cancel":"CANCEL"
+       }
+    },
 
-    "null_pharmacy_name":"Pharmacy Name Not Found",
-    "null_pharmacy_address":"Address Not Found",
-    "null_pharmacy_phone":"Phone Number Not Found",
-    "pharmacy_distance":"km away",
+    "map":{
+        "app_bar_title":"Map"
 
-    "call_button":"Call"
+    },
+
+    "pharmacies" : {
+        "no_duty_pharmacies": "There is no pharmacy on duty in this district."
+    },
+
+    "settings": {
+        "app_bar_title":"SETTINGS",
+        "dark_theme":"Dark Theme",
+        "language":"Language"
+    },
+
+    "buttons": {
+        "navigate": "Navigate Me",
+        "call": "Call",
+        "location":"Nearby Pharmacies"
+    },
+
+    "pharmacy_info": {
+        "name": "Pharmacy Name",
+        "address": "Address",
+        "phone": "Phone",
+        "distance": "km away"
+    },
+
+    "snackbar": {
+        "choose_city_district": "Please choose city and district",
+        "choose_city": "Please choose city",
+        "require_location_permission": "Location Permission Required, Please Allow Location Permission From Settings",
+        "confirm_pharmacy": "It is recommended that you call and confirm before going to pharmacies.",
+        "no_internet_connection": "No Internet Connection"
+    }
 
 }

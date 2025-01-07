@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nobetcieczane/core/constants/constants.dart';
+import 'package:nobetcieczane/core/constants/image_constants.dart';
 import 'package:nobetcieczane/core/init/lang/translations/locale_keys.g.dart';
+import 'package:nobetcieczane/core/init/theme/cubit/light/color_scheme_light.dart';
 import 'package:nobetcieczane/core/utils/intent_utils.dart';
 import 'package:nobetcieczane/features/home/presentation/view/settings/settings_view.dart';
 
@@ -64,10 +66,10 @@ class CustomDrawer extends StatelessWidget {
             child: Column(
               children: [
                 Image.asset(
-                  'assets/logo/app_logo.png',
+                  ImageConstants.appLogo,
                   width: 100,
                   height: 100,
-                  color: Colors.red,
+                  color: ColorSchemeLight.instance.red,
                 ),
                 const Text(
                   Constants.developer,

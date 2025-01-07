@@ -87,8 +87,8 @@ class _HomeViewState extends State<HomeView> with _HomeViewMixin {
   Widget _buildCitySelectionButton() {
     return SelectionButton(
       icon: Icons.location_city,
-      title: _selectedCity?.cities ?? LocaleKeys.choose_city.tr(),
-      subtitle: LocaleKeys.look_up_city_list.tr(),
+      title: _selectedCity?.cities ?? LocaleKeys.home_choose_city.tr(),
+      subtitle: LocaleKeys.home_look_up_city.tr(),
       onTap: () => _onCitySelect(context),
     );
   }
@@ -96,8 +96,8 @@ class _HomeViewState extends State<HomeView> with _HomeViewMixin {
   Widget _buildDistrictSelectionButton() {
     return SelectionButton(
       icon: Icons.map_outlined,
-      title: _selectedDistrict?.cities ?? LocaleKeys.choose_district.tr(),
-      subtitle: LocaleKeys.look_up_district_list.tr(),
+      title: _selectedDistrict?.cities ?? LocaleKeys.home_choose_district.tr(),
+      subtitle: LocaleKeys.home_look_up_district.tr(),
       onTap: () => _selectedCity != null
           ? _onDistrictSelect(context)
           : _showAlert(context, LocaleKeys.snackbar_choose_city.tr()),

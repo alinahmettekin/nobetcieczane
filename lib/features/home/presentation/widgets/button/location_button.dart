@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nobetcieczane/core/init/theme/cubit/light/color_scheme_light.dart';
 
 /// LocationButton is a custom widget that is used to show a button with a
 /// location icon and a title.
@@ -29,7 +30,7 @@ class LocationButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: Card(
             elevation: 4,
-            color: Colors.blueAccent.shade200,
+            color: ColorSchemeLight.instance.blue,
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Row(
@@ -38,10 +39,10 @@ class LocationButton extends StatelessWidget {
                   CircleAvatar(
                     radius: 24,
                     backgroundColor: Colors.blueAccent.withValues(alpha: 0.1),
-                    child: const Icon(
+                    child: Icon(
                       Icons.gps_fixed,
                       size: 24,
-                      color: Colors.red,
+                      color: ColorSchemeLight.instance.red,
                     ),
                   ),
                   const SizedBox(width: 16),

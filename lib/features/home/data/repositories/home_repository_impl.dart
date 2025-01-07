@@ -27,7 +27,7 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, List<City>>> getCities() async {
     try {
       if (!await connectionChecker.isConnected) {
-        return left(Failure(LocaleKeys.no_internet_connection.tr()));
+        return left(Failure(LocaleKeys.snackbar_no_internet_connection.tr()));
       }
       final cities = await remoteDataSource.getCities();
       return right(cities);
@@ -40,7 +40,7 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, List<District>>> getDistricts(String city) async {
     try {
       if (!await connectionChecker.isConnected) {
-        return left(Failure(LocaleKeys.no_internet_connection.tr()));
+        return left(Failure(LocaleKeys.snackbar_no_internet_connection.tr()));
       }
       final districts = await remoteDataSource.getDistricts(city);
       return right(districts);
@@ -56,7 +56,7 @@ class HomeRepositoryImpl implements HomeRepository {
   ) async {
     try {
       if (!await connectionChecker.isConnected) {
-        return left(Failure(LocaleKeys.no_internet_connection.tr()));
+        return left(Failure(LocaleKeys.snackbar_no_internet_connection.tr()));
       }
       final pharmacies = await remoteDataSource.getPharmacies(city, district);
       return right(pharmacies);
@@ -72,7 +72,7 @@ class HomeRepositoryImpl implements HomeRepository {
   ) async {
     try {
       if (!await connectionChecker.isConnected) {
-        return left(Failure(LocaleKeys.no_internet_connection.tr()));
+        return left(Failure(LocaleKeys.snackbar_no_internet_connection.tr()));
       }
       final pharmacies =
           await remoteDataSource.getNearPharmacies(latitude, longitude);
