@@ -28,3 +28,11 @@ The app is available on Google Play Store. You can download and use it by clicki
 - **API Requests:** The app makes external API requests using the `dio` package.
 
 ## Screenshots
+
+![Screenshot_1736206253](https://github.com/user-attachments/assets/640bf81f-f029-496d-b484-bbbe5dc082c9)
+![Screenshot_1736206293](https://github.com/user-attachments/assets/504d185e-daa9-4636-a2b9-aa505267dd5e)
+![Screenshot_1736206334](https://github.com/user-attachments/assets/73f41f1d-01b5-49c0-b8d9-437badd52dbb)
+![Screenshot_1736206212](https://github.com/user-attachments/assets/d0ab24da-592e-4c90-bc6c-bb885ce223db)
+![Screenshot_1736206256](https://github.com/user-attachments/assets/009538a8-371e-4260-9697-93ad56b65850)
+![Screenshot_1736206370](https://github.com/user-attachments/assets/33f06719-f31b-4f57-9d8f-aecd17689727)
+
