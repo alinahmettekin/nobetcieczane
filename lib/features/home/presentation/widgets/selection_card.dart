@@ -36,7 +36,7 @@ class SelectionButton extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Card(
-            elevation: 4,
+            elevation: 1,
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Row(

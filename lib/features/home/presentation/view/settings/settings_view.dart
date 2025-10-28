@@ -47,7 +47,7 @@ class _SettingsViewState extends State<SettingsView> {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Switch(
-                    activeColor: Colors.grey,
+                    activeThumbColor: Colors.grey,
                     value: Theme.of(context).brightness == Brightness.dark,
                     onChanged: (value) =>
                         context.read<ThemeCubit>().toggleTheme(),
