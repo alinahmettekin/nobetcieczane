@@ -32,7 +32,7 @@ class SearchButton extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Card(
-            elevation: 4,
+            elevation: 1,
             color: ColorSchemeLight.instance.red,
             child: Padding(
               padding: const EdgeInsets.all(8),

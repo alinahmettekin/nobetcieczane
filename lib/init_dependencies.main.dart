@@ -1,7 +1,7 @@
 part of 'init_dependencies.dart';
 
 /// A service locator that provides dependency injection.
-final serviceLocator = GetIt.instance;
+final GetIt serviceLocator = GetIt.instance;
 
 /// Initializes the dependencies.
 Future<void> initDependencies() async {
