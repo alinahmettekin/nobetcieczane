@@ -9,8 +9,11 @@ import 'package:nobetcieczane/core/constants/constants.dart';
 import 'package:nobetcieczane/core/helper/ad_mob_helper.dart';
 import 'package:nobetcieczane/core/init/lang/translations/locale_keys.g.dart';
 import 'package:nobetcieczane/core/init/theme/cubit/theme_cubit.dart';
+import 'package:nobetcieczane/core/init/cache/cache_service.dart';
+import 'package:nobetcieczane/core/utils/intent_utils.dart';
 import 'package:nobetcieczane/core/utils/location.dart';
 import 'package:nobetcieczane/features/home/presentation/bloc/home_bloc.dart';
+import 'package:nobetcieczane/init_dependencies.dart';
 import 'package:nobetcieczane/features/home/presentation/view/map/map_view.dart';
 import 'package:nobetcieczane/features/home/presentation/view/pharmacies/pharmacies_view.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/button/location_button.dart';
@@ -114,9 +117,7 @@ class _HomeViewState extends State<HomeView> with _HomeViewMixin {
             return RecentSearchs(
               searches: state.searches,
               onDeleteItem: (search) {
-                context
-                    .read<HomeBloc>()
-                    .add(HomeDeleteRecentSearch(search: search));
+                context.read<HomeBloc>().add(HomeDeleteRecentSearch(search: search));
               },
               onClearAll: () {
                 context.read<HomeBloc>().add(HomeClearRecentSearches());
