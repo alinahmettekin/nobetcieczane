@@ -27,6 +27,18 @@ abstract class CacheService {
 
   /// Deletes the recent search from the cache.
   Future<void> deleteRecentSearch(Map<String, String> search);
+
+  /// Gets the app open count from the cache.
+  Future<int> getAppOpenCount();
+
+  /// Increments the app open count in the cache.
+  Future<void> incrementAppOpenCount();
+
+  /// Gets whether the review has been requested from the cache.
+  Future<bool> isReviewRequested();
+
+  /// Saves whether the review has been requested to the cache.
+  Future<void> setReviewRequested({required bool requested});
 }
 
 /// A service class that provides caching functionality
@@ -42,6 +54,8 @@ class SharedPrefService implements CacheService {
   static const String _languageKey = 'language_code';
   static const String _countryKey = 'country_code';
   static const String _recentSearchesKey = 'recent_searches';
+  static const String _appOpenCountKey = 'app_open_count';
+  static const String _isReviewRequestedKey = 'is_review_requested';
   static const int _maxRecentSearches = 5;
 
   @override
@@ -73,8 +87,7 @@ class SharedPrefService implements CacheService {
     final searches = sharedPreferences.getStringList(_recentSearchesKey) ?? [];
     return searches
         .map(
-          (s) =>
-              (json.decode(s) as Map<String, dynamic>).cast<String, String>(),
+          (s) => (json.decode(s) as Map<String, dynamic>).cast<String, String>(),
         )
         .toList();
   }
@@ -85,9 +98,7 @@ class SharedPrefService implements CacheService {
 
     searches
       ..removeWhere(
-        (s) =>
-            s['citySlug'] == search['citySlug'] &&
-            s['districtSlug'] == search['districtSlug'],
+        (s) => s['citySlug'] == search['citySlug'] && s['districtSlug'] == search['districtSlug'],
       )
       ..insert(0, search);
 
@@ -112,14 +123,33 @@ class SharedPrefService implements CacheService {
     final searches = await getRecentSearches();
 
     searches.removeWhere(
-      (s) =>
-          s['citySlug'] == search['citySlug'] &&
-          s['districtSlug'] == search['districtSlug'],
+      (s) => s['citySlug'] == search['citySlug'] && s['districtSlug'] == search['districtSlug'],
     );
 
     await sharedPreferences.setStringList(
       _recentSearchesKey,
       searches.map((s) => json.encode(s)).toList(),
     );
+  }
+
+  @override
+  Future<int> getAppOpenCount() async {
+    return sharedPreferences.getInt(_appOpenCountKey) ?? 0;
+  }
+
+  @override
+  Future<void> incrementAppOpenCount() async {
+    final count = await getAppOpenCount();
+    await sharedPreferences.setInt(_appOpenCountKey, count + 1);
+  }
+
+  @override
+  Future<bool> isReviewRequested() async {
+    return sharedPreferences.getBool(_isReviewRequestedKey) ?? false;
+  }
+
+  @override
+  Future<void> setReviewRequested({required bool requested}) async {
+    await sharedPreferences.setBool(_isReviewRequestedKey, requested);
   }
 }

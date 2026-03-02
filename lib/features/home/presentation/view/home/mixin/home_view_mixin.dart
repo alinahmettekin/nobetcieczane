@@ -8,6 +8,13 @@ mixin _HomeViewMixin on State<HomeView> {
   void initState() {
     super.initState();
     _loadRecentSearchs();
+    _checkAppReview();
+  }
+
+  void _checkAppReview() {
+    unawaited(
+      IntentUtils.checkAndRequestReview(serviceLocator.get<CacheService>()),
+    );
   }
 
   @override
@@ -67,8 +74,7 @@ mixin _HomeViewMixin on State<HomeView> {
     final selectedCity = await showDropdownListMenu(
       context,
       title: LocaleKeys.home_choose_city.tr(),
-      itemsSelector: (state) =>
-          state is HomeGetCitiesSuccess ? state.cities : null,
+      itemsSelector: (state) => state is HomeGetCitiesSuccess ? state.cities : null,
     );
     if (selectedCity != null) {
       setState(() {
@@ -79,14 +85,11 @@ mixin _HomeViewMixin on State<HomeView> {
   }
 
   Future<void> _onDistrictSelect(BuildContext context) async {
-    context
-        .read<HomeBloc>()
-        .add(HomeGetDistricts(citySlug: _selectedCity!.slug));
+    context.read<HomeBloc>().add(HomeGetDistricts(citySlug: _selectedCity!.slug));
     final selectedDistrict = await showDropdownListMenu(
       context,
       title: LocaleKeys.home_choose_district.tr(),
-      itemsSelector: (state) =>
-          state is HomeGetDistrictsSuccess ? state.districts : null,
+      itemsSelector: (state) => state is HomeGetDistrictsSuccess ? state.districts : null,
     );
     if (selectedDistrict != null) {
       setState(() {
@@ -199,8 +202,7 @@ Future<T?> showDropdownListMenu<T extends Selectable>(
             return DropdownMenuBuilder.buildLoadingState();
           }
 
-          if (state is HomeGetCitiesSuccess ||
-              state is HomeGetDistrictsSuccess) {
+          if (state is HomeGetCitiesSuccess || state is HomeGetDistrictsSuccess) {
             final items = itemsSelector(state);
             return DropdownListContent<T>(
               items: items,
@@ -219,9 +221,7 @@ Future<T?> showDropdownListMenu<T extends Selectable>(
 
 void _handleFailureStates(BuildContext context, HomeState state) {
   if (state is HomeGetCitiesFailure || state is HomeGetDistrictsFailure) {
-    final message = state is HomeGetCitiesFailure
-        ? state.message
-        : (state as HomeGetDistrictsFailure).message;
+    final message = state is HomeGetCitiesFailure ? state.message : (state as HomeGetDistrictsFailure).message;
 
     Navigator.pop(context);
     ScaffoldMessenger.of(context)

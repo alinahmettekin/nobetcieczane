@@ -3,7 +3,7 @@ description: "."
 
 publish_to: "none"
 
-version: 2.0.2+11
+version: 2.0.3+12
 
 environment:
   sdk: ^3.5.3
@@ -30,6 +30,8 @@ dependencies:
   google_maps_flutter: ^2.10.0
 
   google_mobile_ads: ^6.0.0
+
+  in_app_review: ^2.0.11
 
   internet_connection_checker_plus: ^2.9.0
 
