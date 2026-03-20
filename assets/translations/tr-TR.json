@@ -36,8 +36,11 @@
 
    "settings": {
        "app_bar_title":"AYARLAR",
-       "dark_theme":"Karanlık Tema",
-       "language":"Dil"
+       "dark_theme":"Tema",
+       "language":"Dil",
+       "theme_light":"Açık",
+       "theme_dark":"Koyu",
+       "theme_system":"Sistem"
    },
 
    "buttons": {
@@ -56,9 +59,22 @@
    "snackbar": {
        "choose_city_district": "Lütfen şehir ve ilçe seçin",
        "choose_city": "Lütfen şehir seçin",
-       "require_location_permission": "Konum İzni Gerekli, Lütfen Dialog Ekranından Veya Ayarlardan Konum İzni Verin",
+       "require_location_permission": "Konum izni gerekli",
        "confirm_pharmacy": "Eczaneye gitmeden önce arayıp teyit etmeniz önerilir.",
        "no_internet_connection": "İnternet Bağlantısı Yok"
+   },
+
+   "location": {
+       "loading": "Konumunuz alınıyor…",
+       "dialog_denied_title": "Konum İzni Gerekli",
+       "dialog_denied_message": "Yakınımdaki eczaneleri görebilmek için konum iznine ihtiyacımız var. İzin vermek ister misiniz?",
+       "dialog_denied_forever_title": "Konum İzni Kapalı",
+       "dialog_denied_forever_message": "Konum izni kalıcı olarak reddedilmiş. Lütfen uygulama ayarlarından konum iznini açın.",
+       "dialog_service_disabled_title": "Konum Servisi Kapalı",
+       "dialog_service_disabled_message": "Cihazınızın konum servisi kapalı. Lütfen ayarlardan konumu açın.",
+       "button_go_to_settings": "Ayarlara Git",
+       "button_grant": "İzin Ver",
+       "button_cancel": "Vazgeç"
    },
 
    "dialog": {

@@ -1,5 +1,8 @@
+import 'dart:ui' as ui;
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nobetcieczane/core/base/entities/pharmacy.dart';
@@ -31,9 +34,41 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
+  BitmapDescriptor _markerIcon = BitmapDescriptor.defaultMarker;
+
   @override
   void initState() {
     super.initState();
+    _loadMarkerIcon(targetWidth: 48);
+  }
+
+  /// Loads the pharmacy marker asset and resizes it to [targetWidth] logical
+  /// pixels. Using dart:ui resize avoids the iOS crash that happens when a
+  /// large PNG is passed directly to BitmapDescriptor.fromAssetImage.
+  Future<void> _loadMarkerIcon({int targetWidth = 80}) async {
+    try {
+      final data = await rootBundle.load(ImageConstants.pharmacyIcon);
+      final bytes = data.buffer.asUint8List();
+
+      final codec = await ui.instantiateImageCodec(
+        bytes,
+        targetWidth: targetWidth,
+      );
+      final frame = await codec.getNextFrame();
+      final byteData = await frame.image.toByteData(
+        format: ui.ImageByteFormat.png,
+      );
+
+      if (byteData != null && mounted) {
+        setState(() {
+          _markerIcon = BitmapDescriptor.bytes(
+            byteData.buffer.asUint8List(),
+          );
+        });
+      }
+    } on Exception {
+      // Fallback: keep the default red marker
+    }
   }
 
   @override
@@ -55,29 +90,51 @@ class _MapViewState extends State<MapView> {
         ),
         backgroundColor: ColorSchemeLight.instance.red,
       ),
-      body: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
+      body: BlocListener<HomeBloc, HomeState>(
+        listener: (context, state) {
           if (state is HomeGetNearPharmaciesFailure) {
-            return Center(
-              child: Text(state.message),
-            );
-          }
-
-          if (state is HomeGetNearPharmaciesSuccess) {
-            return SafeArea(
-              child: Stack(
-                children: [
-                  _buildGoogleMap(context, state),
-                  _buildAdMobBanner(),
-                ],
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
               ),
-            );
-          } else {
-            return const Center(
-              child: Loader(),
             );
           }
         },
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            if (state is HomeGetNearPharmaciesFailure) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(state.message),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Back'),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            if (state is HomeGetNearPharmaciesSuccess) {
+              return SafeArea(
+                child: Stack(
+                  children: [
+                    _buildGoogleMap(context, state),
+                    _buildAdMobBanner(),
+                  ],
+                ),
+              );
+            } else {
+              return const Center(
+                child: Loader(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -104,11 +161,7 @@ class _MapViewState extends State<MapView> {
                     ? ''
                     : '${pharmacy.distanceKm!.toStringAsFixed(2)} km',
               ),
-              icon: AssetMapBitmap(
-                ImageConstants.pharmacyIcon,
-                width: 45,
-                height: 45,
-              ),
+              icon: _markerIcon,
               onTap: () => _buildSelectionCard(context, pharmacy),
             ),
           )

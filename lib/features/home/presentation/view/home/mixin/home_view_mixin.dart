@@ -3,6 +3,7 @@ part of '../home_view.dart';
 mixin _HomeViewMixin on State<HomeView> {
   Selectable? _selectedCity;
   Selectable? _selectedDistrict;
+  bool _isLocationLoading = false;
 
   @override
   void initState() {
@@ -40,28 +41,22 @@ mixin _HomeViewMixin on State<HomeView> {
         child: SizedBox(
           height: 75,
           width: double.infinity,
-          child: LocationButton(
-            title: LocaleKeys.buttons_location.tr(),
-            onTap: () => navigateToMapView(context),
-          ),
+          child: _isLocationLoading
+              ? LocationButton(
+                  title: LocaleKeys.location_loading.tr(),
+                  onTap: () {}, // disabled while loading
+                  isLoading: true,
+                )
+              : LocationButton(
+                  title: LocaleKeys.buttons_location.tr(),
+                  onTap: () => navigateToMapView(context),
+                ),
         ),
       ),
     );
   }
 
-  List<Widget> _appBarActions() {
-    return <Widget>[
-      IconButton(
-        onPressed: () {
-          context.read<ThemeCubit>().toggleTheme();
-          setState(() {});
-        },
-        icon: context.read<ThemeCubit>().state.theme == AppTheme.light
-            ? const Icon(Icons.dark_mode)
-            : const Icon(Icons.light_mode),
-      ),
-    ];
-  }
+  List<Widget> _appBarActions() => [];
 
   // FUNCTIONS
 
@@ -131,40 +126,101 @@ mixin _HomeViewMixin on State<HomeView> {
   }
 
   Future<void> navigateToMapView(BuildContext context) async {
-    final userLocation = await getUserLocation();
+    // Show loading indicator on the button
+    setState(() => _isLocationLoading = true);
 
-    if (userLocation == null) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              LocaleKeys.snackbar_require_location_permission.tr(),
+    final result = await getUserLocation();
+
+    setState(() => _isLocationLoading = false);
+
+    if (!context.mounted) return;
+
+    switch (result.status) {
+      case LocationResultStatus.granted:
+        final data = result.data!;
+        context.read<HomeBloc>().add(
+              HomeGetNearPharmacies(
+                latitude: data.latitude!,
+                longitude: data.longitude!,
+              ),
+            );
+        unawaited(
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MapView(
+                latitude: data.latitude!,
+                longitude: data.longitude!,
+              ),
             ),
           ),
         );
-      }
-      return;
-    }
 
-    if (context.mounted) {
-      context.read<HomeBloc>().add(
-            HomeGetNearPharmacies(
-              latitude: userLocation.latitude!,
-              longitude: userLocation.longitude!,
-            ),
-          );
-      unawaited(
-        Navigator.push(
+      case LocationResultStatus.denied:
+        await _showLocationDialog(
           context,
-          MaterialPageRoute(
-            builder: (context) => MapView(
-              latitude: userLocation.latitude!,
-              longitude: userLocation.longitude!,
-            ),
-          ),
-        ),
-      );
+          title: LocaleKeys.location_dialog_denied_title.tr(),
+          message: LocaleKeys.location_dialog_denied_message.tr(),
+          primaryLabel: LocaleKeys.location_button_grant.tr(),
+          onPrimary: () {
+            Navigator.pop(context);
+            // Re-trigger after user reads the explanation
+            unawaited(navigateToMapView(context));
+          },
+        );
+
+      case LocationResultStatus.deniedForever:
+        await _showLocationDialog(
+          context,
+          title: LocaleKeys.location_dialog_denied_forever_title.tr(),
+          message: LocaleKeys.location_dialog_denied_forever_message.tr(),
+          primaryLabel: LocaleKeys.location_button_go_to_settings.tr(),
+          onPrimary: () async {
+            Navigator.pop(context);
+            // Opens system app-settings page on both iOS and Android
+            await Location().requestPermission();
+          },
+        );
+
+      case LocationResultStatus.serviceDisabled:
+        await _showLocationDialog(
+          context,
+          title: LocaleKeys.location_dialog_service_disabled_title.tr(),
+          message: LocaleKeys.location_dialog_service_disabled_message.tr(),
+          primaryLabel: LocaleKeys.location_button_go_to_settings.tr(),
+          onPrimary: () async {
+            Navigator.pop(context);
+            await Location().requestService();
+          },
+        );
     }
+  }
+
+  Future<void> _showLocationDialog(
+    BuildContext context, {
+    required String title,
+    required String message,
+    required String primaryLabel,
+    required VoidCallback onPrimary,
+  }) async {
+    return showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(LocaleKeys.location_button_cancel.tr()),
+          ),
+          FilledButton(
+            onPressed: onPrimary,
+            child: Text(primaryLabel),
+          ),
+        ],
+      ),
+    );
   }
 
   // ALERTS

@@ -16,9 +16,7 @@ class NavigateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        IntentUtils.launchGoogleMaps(latLng);
-      },
+      onTap: () => IntentUtils.launchGoogleMaps(context, latLng),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(

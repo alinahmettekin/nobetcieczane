@@ -41,16 +41,16 @@ class NobetciEczane extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
-        final themeData =
-            state.theme == AppTheme.light ? state.lightTheme : state.darkTheme;
         return MaterialApp(
           supportedLocales: context.supportedLocales,
           localizationsDelegates: context.localizationDelegates,
           locale: context.locale,
           debugShowCheckedModeBanner: false,
-          theme: themeData,
+          theme: state.lightTheme,
+          darkTheme: state.darkTheme,
+          themeMode: state.themeMode,
 
-          /// easy localization not working on firt build
+          /// easy localization not working on first build
           // ignore: prefer_const_constructors
           home: HomeView(),
         );

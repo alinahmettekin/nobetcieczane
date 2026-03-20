@@ -1,13 +1,15 @@
 part of 'theme_cubit.dart';
 
-/// AppTheme is an enum that contains light and dark themes
-@immutable
+/// AppTheme is an enum that contains light, dark and system themes
 enum AppTheme {
   /// light theme
   light,
 
   /// dark theme
   dark,
+
+  /// follows the OS setting
+  system,
 }
 
 /// ThemeState is a class that contains theme
@@ -22,4 +24,11 @@ class ThemeState {
   ThemeData get lightTheme => ThemeData.light();
 
   ThemeData get darkTheme => ThemeData.dark();
+
+  /// Returns the Flutter ThemeMode that matches the current [theme].
+  ThemeMode get themeMode => switch (theme) {
+        AppTheme.light => ThemeMode.light,
+        AppTheme.dark => ThemeMode.dark,
+        AppTheme.system => ThemeMode.system,
+      };
 }

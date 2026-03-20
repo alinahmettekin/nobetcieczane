@@ -36,8 +36,11 @@
 
     "settings": {
         "app_bar_title":"SETTINGS",
-        "dark_theme":"Dark Theme",
-        "language":"Language"
+        "dark_theme":"Theme",
+        "language":"Language",
+        "theme_light":"Light",
+        "theme_dark":"Dark",
+        "theme_system":"System"
     },
 
     "buttons": {
@@ -56,9 +59,22 @@
     "snackbar": {
         "choose_city_district": "Please choose city and district",
         "choose_city": "Please choose city",
-        "require_location_permission": "Location Permission Required, Please Allow Location Permission From Settings",
+        "require_location_permission": "Location permission required",
         "confirm_pharmacy": "It is recommended that you call and confirm before going to pharmacies.",
         "no_internet_connection": "No Internet Connection"
+    },
+
+    "location": {
+        "loading": "Getting your location\u2026",
+        "dialog_denied_title": "Location Permission Required",
+        "dialog_denied_message": "We need location access to show nearby pharmacies. Would you like to grant permission?",
+        "dialog_denied_forever_title": "Location Permission Blocked",
+        "dialog_denied_forever_message": "Location permission has been permanently denied. Please enable it from the app settings.",
+        "dialog_service_disabled_title": "Location Service Disabled",
+        "dialog_service_disabled_message": "Your device's location service is turned off. Please enable it from settings.",
+        "button_go_to_settings": "Go to Settings",
+        "button_grant": "Grant Permission",
+        "button_cancel": "Cancel"
     }
 
 }

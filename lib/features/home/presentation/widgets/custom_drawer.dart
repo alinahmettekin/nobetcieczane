@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:nobetcieczane/core/constants/constants.dart';
 import 'package:nobetcieczane/core/constants/image_constants.dart';
@@ -48,18 +49,19 @@ class CustomDrawer extends StatelessWidget {
               );
             },
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.star,
+          if (!Platform.isIOS)
+            ListTile(
+              leading: const Icon(
+                Icons.star,
+              ),
+              title: Text(
+                LocaleKeys.drawer_rate_us.tr(),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                IntentUtils.launchGooglePlay();
+              },
             ),
-            title: Text(
-              LocaleKeys.drawer_rate_us.tr(),
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              IntentUtils.launchGooglePlay();
-            },
-          ),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.only(bottom: 20),

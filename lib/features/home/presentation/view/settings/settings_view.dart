@@ -34,26 +34,53 @@ class _SettingsViewState extends State<SettingsView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    LocaleKeys.settings_dark_theme.tr(),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+            BlocBuilder<ThemeCubit, ThemeState>(
+              builder: (context, themeState) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 10,
                   ),
-                  Switch(
-                    activeThumbColor: Colors.grey,
-                    value: Theme.of(context).brightness == Brightness.dark,
-                    onChanged: (value) =>
-                        context.read<ThemeCubit>().toggleTheme(),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ],
-              ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        LocaleKeys.settings_dark_theme.tr(),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SegmentedButton<AppTheme>(
+                        segments: [
+                          ButtonSegment(
+                            value: AppTheme.system,
+                            label: Text(LocaleKeys.settings_theme_system.tr()),
+                          ),
+                          ButtonSegment(
+                            value: AppTheme.light,
+                            label: Text(LocaleKeys.settings_theme_light.tr()),
+                          ),
+                          ButtonSegment(
+                            value: AppTheme.dark,
+                            label: Text(LocaleKeys.settings_theme_dark.tr()),
+                          ),
+                        ],
+                        selected: {themeState.theme},
+                        onSelectionChanged: (selected) {
+                          final picked = selected.first;
+                          if (picked == AppTheme.system) {
+                            context.read<ThemeCubit>().resetToSystem();
+                          } else {
+                            context.read<ThemeCubit>().setTheme(picked);
+                          }
+                        },
+                        showSelectedIcon: false,
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 15),
             Container(

@@ -3,17 +3,16 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:location/location.dart' show Location;
 import 'package:nobetcieczane/core/base/entities/city.dart';
 import 'package:nobetcieczane/core/base/entities/selectable.dart';
 import 'package:nobetcieczane/core/constants/constants.dart';
 import 'package:nobetcieczane/core/helper/ad_mob_helper.dart';
-import 'package:nobetcieczane/core/init/lang/translations/locale_keys.g.dart';
-import 'package:nobetcieczane/core/init/theme/cubit/theme_cubit.dart';
 import 'package:nobetcieczane/core/init/cache/cache_service.dart';
+import 'package:nobetcieczane/core/init/lang/translations/locale_keys.g.dart';
 import 'package:nobetcieczane/core/utils/intent_utils.dart';
 import 'package:nobetcieczane/core/utils/location.dart';
 import 'package:nobetcieczane/features/home/presentation/bloc/home_bloc.dart';
-import 'package:nobetcieczane/init_dependencies.dart';
 import 'package:nobetcieczane/features/home/presentation/view/map/map_view.dart';
 import 'package:nobetcieczane/features/home/presentation/view/pharmacies/pharmacies_view.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/button/location_button.dart';
@@ -23,6 +22,7 @@ import 'package:nobetcieczane/features/home/presentation/widgets/dropdown/drop_d
 import 'package:nobetcieczane/features/home/presentation/widgets/dropdown/dropdown_list_content.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/recent_searchs.dart';
 import 'package:nobetcieczane/features/home/presentation/widgets/selection_card.dart';
+import 'package:nobetcieczane/init_dependencies.dart';
 
 part 'mixin/home_view_mixin.dart';
 

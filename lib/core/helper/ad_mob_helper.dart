@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -11,17 +13,17 @@ class AdConfig {
   /// firstBannerAdUnitId is a AdMob banner ad unit id
   static String get firstBannerAdUnitId => _isDebug
       ? Env.testBannerId // Test ID
-      : Env.bannerIdI;
+      : Platform.isAndroid ? Env.bannerIdIAndroid : Env.bannerIdIIos;
 
   /// secondBannerAdUnitId is a AdMob banner ad unit id
   static String get secondBannerAdUnitId => _isDebug
       ? Env.testBannerId // Test ID
-      : Env.bannerIdII;
+      : Platform.isAndroid ? Env.bannerIdIIAndroid : Env.bannerIdIIIos;
 
   /// thirdBannerAdUnitId is a AdMob banner ad unit id
   static String get thirdBannerAdUnitId => _isDebug
       ? Env.testBannerId // Test ID
-      : Env.bannerIdIII;
+      : Platform.isAndroid ? Env.bannerIdIIIAndroid : Env.bannerIdIIIIos;
 }
 
 /// BannerAdType is an enum that contains the banner ad types

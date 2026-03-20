@@ -5,10 +5,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// A service class that provides caching functionality.
 abstract class CacheService {
   /// Gets the theme from the cache.
-  Future<bool> getTheme();
+  /// Returns null if no manual preference has been saved (system mode).
+  Future<bool?> getTheme();
 
   /// Saves the theme to the cache.
   Future<void> saveTheme({required bool isDark});
+
+  /// Clears the saved theme preference so the app follows the system setting.
+  Future<void> clearTheme();
 
   /// Gets the language from the cache.
   Future<String?> getLanguage();
@@ -59,13 +63,18 @@ class SharedPrefService implements CacheService {
   static const int _maxRecentSearches = 5;
 
   @override
-  Future<bool> getTheme() async {
-    return sharedPreferences.getBool(_themeKey) ?? false;
+  Future<bool?> getTheme() async {
+    return sharedPreferences.getBool(_themeKey);
   }
 
   @override
   Future<void> saveTheme({required bool isDark}) async {
     await sharedPreferences.setBool(_themeKey, isDark);
+  }
+
+  @override
+  Future<void> clearTheme() async {
+    await sharedPreferences.remove(_themeKey);
   }
 
   @override

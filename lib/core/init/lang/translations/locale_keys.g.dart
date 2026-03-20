@@ -33,6 +33,9 @@ abstract class LocaleKeys {
   static const settings_app_bar_title = 'settings.app_bar_title';
   static const settings_dark_theme = 'settings.dark_theme';
   static const settings_language = 'settings.language';
+  static const settings_theme_light = 'settings.theme_light';
+  static const settings_theme_dark = 'settings.theme_dark';
+  static const settings_theme_system = 'settings.theme_system';
   static const settings = 'settings';
   static const buttons_navigate = 'buttons.navigate';
   static const buttons_call = 'buttons.call';
@@ -51,4 +54,21 @@ abstract class LocaleKeys {
   static const snackbar_no_internet_connection =
       'snackbar.no_internet_connection';
   static const snackbar = 'snackbar';
+  static const location_loading = 'location.loading';
+  static const location_dialog_denied_title = 'location.dialog_denied_title';
+  static const location_dialog_denied_message =
+      'location.dialog_denied_message';
+  static const location_dialog_denied_forever_title =
+      'location.dialog_denied_forever_title';
+  static const location_dialog_denied_forever_message =
+      'location.dialog_denied_forever_message';
+  static const location_dialog_service_disabled_title =
+      'location.dialog_service_disabled_title';
+  static const location_dialog_service_disabled_message =
+      'location.dialog_service_disabled_message';
+  static const location_button_go_to_settings =
+      'location.button_go_to_settings';
+  static const location_button_grant = 'location.button_grant';
+  static const location_button_cancel = 'location.button_cancel';
+  static const location = 'location';
 }
